@@ -79,6 +79,6 @@ void Font::SetFontSize(float size)
 {
 	if (face)
 	{
-		FT_Set_Pixel_Sizes(*face, 0, size);
+		FT_Set_Pixel_Sizes(face, 0, size);
 	}
 }
