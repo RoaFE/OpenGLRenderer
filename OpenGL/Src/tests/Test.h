@@ -21,6 +21,8 @@ namespace test {
 		virtual void OnUpdate(float dt) {}
 		virtual void OnRender() {}
 		virtual void OnImGuiRender() {}
+		virtual void OnImGuiRenderMenuBar() {};
+		virtual void ScrollCallBack(double offset) {};
 		void SetWindow(GLFWwindow* window) { m_Window = window; }
 	protected:
 		GLFWwindow* m_Window;
