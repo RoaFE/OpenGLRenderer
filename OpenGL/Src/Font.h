@@ -8,7 +8,12 @@
 #include <limits>
 #include <map>
 #include "glm/glm.hpp"
+#include "Shader.h"
 
+#include "VertexBuffer.h"
+#include "VertexBufferLayout.h"
+#include "IndexBuffer.h"
+#include "VertexArray.h"
 
 struct Character {
 	unsigned int TextureID;  // ID handle of the glyph texture
@@ -27,11 +32,19 @@ public:
 	bool LoadFont(std::string path);
 	void SetFontSize(float size);
 
+	void RenderText(Shader &s, std::string text, float x, float y, float scale, glm::vec3 colour);
 
 private:
 	FT_Library ft;
 	FT_Face face;
 	std::map<char, Character> Characters;
+
+
+	unsigned int VAO, VBO;
+
+	VertexArray* m_VAO;
+	VertexBuffer* m_VB;
+	IndexBuffer* m_IB;
 };
 
 

@@ -23,6 +23,7 @@ namespace test {
 		virtual void OnImGuiRender() {}
 		virtual void OnImGuiRenderMenuBar() {};
 		virtual void ScrollCallBack(double offset) {};
+		virtual void OnRenderUI() {};
 		void SetWindow(GLFWwindow* window) { m_Window = window; }
 	protected:
 		GLFWwindow* m_Window;

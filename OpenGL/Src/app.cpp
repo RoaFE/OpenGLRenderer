@@ -27,6 +27,7 @@
 #include "tests/Test2Body.h"
 #include "tests/TestSolarSystem.h"
 #include "tests/TestMeshes.h"
+#include "tests/TestFont.h"
 
 double yScroll;
 
@@ -63,7 +64,7 @@ int main(void)
 	glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
 
 	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(960, 540, "Renderer", NULL, NULL);
+	window = glfwCreateWindow(800, 600, "Renderer", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
@@ -110,9 +111,9 @@ int main(void)
 	{
 
 
+		GLCall(glEnable(GL_CULL_FACE));
 		GLCall(glEnable(GL_BLEND));
 		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-		GLCall(glEnable(GL_CULL_FACE));
 
 
 		Renderer renderer;
@@ -135,6 +136,7 @@ int main(void)
 		//testMenu->RegisterTest<test::TestCube>("Test Cube");
 		testMenu->RegisterTest<test::TestCube>("Test Cube");
 		testMenu->RegisterTest<test::Test2Body>("Test 2 Body");
+		testMenu->RegisterTest<test::TestFont>("Test Font");
 		//testMenu->RegisterTest<test::TestSolarSystem>("Test Solar System");
 		//testMenu->RegisterTest<test::TestMeshes>("Test Mesh");
 		/* Loop until the user closes the window */
@@ -149,6 +151,8 @@ int main(void)
 			GLCall(glClearColor(0.0f,0.0f,0.0f,1.0f));
 			renderer.Clear();
 
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 			ImGui_ImplGlfwGL3_NewFrame();
 
@@ -167,9 +171,10 @@ int main(void)
 				currentTest->ScrollCallBack(yScroll);
 				currentTest->OnUpdate(frameTime);
 
-				currentTest->OnRender();
+				currentTest->OnRender();				
 				if (renderUI)
 				{
+					currentTest->OnRenderUI();
 					if (ImGui::BeginMainMenuBar())
 					{
 						if (currentTest != testMenu && ImGui::Button("<-"))

@@ -126,12 +126,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Src\Camera.cpp" />
+    <ClCompile Include="Src\Font.cpp" />
     <ClCompile Include="Src\gameObjects\GameObject.cpp" />
     <ClCompile Include="Src\gameObjects\Mesh.cpp" />
     <ClCompile Include="Src\tests\Test.cpp" />
     <ClCompile Include="Src\tests\Test2Body.cpp" />
     <ClCompile Include="Src\tests\TestClearColour.cpp" />
     <ClCompile Include="Src\tests\TestCube.cpp" />
+    <ClCompile Include="Src\tests\TestFont.cpp" />
     <ClCompile Include="Src\tests\TestMeshes.cpp" />
     <ClCompile Include="Src\tests\TestQuads.cpp" />
     <ClCompile Include="Src\tests\TestRenderTexture.cpp" />
@@ -152,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
+    <None Include="res\shaders\Text.shader" />
     <None Include="Src\vendor\glm\detail\func_common.inl" />
     <None Include="Src\vendor\glm\detail\func_common_simd.inl" />
     <None Include="Src\vendor\glm\detail\func_exponential.inl" />
@@ -289,6 +292,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Camera.h" />
+    <ClInclude Include="Src\Font.h" />
     <ClInclude Include="Src\gameObjects\GameObject.h" />
     <ClInclude Include="Src\gameObjects\Mesh.h" />
     <ClInclude Include="Src\rowMath\NumericalSolution.h" />
@@ -297,6 +301,7 @@
     <ClInclude Include="Src\tests\TestClearColour.h" />
     <ClInclude Include="Src\tests\Test.h" />
     <ClInclude Include="Src\tests\TestCube.h" />
+    <ClInclude Include="Src\tests\TestFont.h" />
     <ClInclude Include="Src\tests\TestMeshes.h" />
     <ClInclude Include="Src\tests\TestQuads.h" />
     <ClInclude Include="Src\tests\TestRenderTexture.h" />

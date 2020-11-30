@@ -87,6 +87,12 @@
     <ClCompile Include="Src\tests\TestMeshes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\tests\TestFont.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
@@ -492,6 +498,7 @@
     <None Include="Src\vendor\glm\gtx\wrap.inl">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="res\shaders\Text.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Renderer.h">
@@ -1305,6 +1312,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\tests\TestMeshes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\tests\TestFont.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
