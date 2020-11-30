@@ -149,6 +149,7 @@
     <ClCompile Include="Src\vendor\glm\detail\glm.cpp" />
     <ClCompile Include="Src\vendor\imgui\imgui_impl_glfw_gl3.cpp" />
     <ClCompile Include="Src\vendor\stb_image\stb_image.cpp" />
+    <ClCompile Include="Src\Text.cpp" />
     <ClCompile Include="Src\VertexBuffer.cpp" />
     <ClCompile Include="Src\VertexArray.cpp" />
   </ItemGroup>
@@ -306,6 +307,7 @@
     <ClInclude Include="Src\tests\TestQuads.h" />
     <ClInclude Include="Src\tests\TestRenderTexture.h" />
     <ClInclude Include="Src\tests\TestSolarSystem.h" />
+    <ClInclude Include="Src\Text.h" />
     <ClInclude Include="Src\vendor\imgui\imconfig.h" />
     <ClInclude Include="Src\vendor\imgui\imgui.h" />
     <ClInclude Include="Src\Shader.h" />
