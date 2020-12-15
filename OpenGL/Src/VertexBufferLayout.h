@@ -3,14 +3,20 @@
 #include <vector>
 #include <GL/glew.h>
 #include "Renderer.h"
-
+#define ASSERT(x) if(!(x)) __debugbreak();
+#ifdef DEBUG
+#define GLCall(x) GLClearError();\
+		x;\
+		ASSERT(GLLogCall(#x, __FILE__, __LINE__))
+#else
+#define GLCall(x) x
+#endif
 
 struct VertexBufferElement
 {
 	unsigned int type;
 	unsigned int count;
 	unsigned int normalised;
-
 	
 	static unsigned int GetSizeOfType(unsigned int type)
 	{

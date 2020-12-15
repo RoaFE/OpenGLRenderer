@@ -15,6 +15,7 @@
 #include "Camera.h"
 #include "rowMath/NumericalSolution.h"
 #include "Font.h"
+#include "Text.h"
 
 namespace test {
 	class TestFont : public Test
@@ -47,6 +48,8 @@ namespace test {
 		Camera cam;
 
 		Font* font;
+
+		Text* text;
 
 	};
 

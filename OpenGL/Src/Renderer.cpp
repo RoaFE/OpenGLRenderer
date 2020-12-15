@@ -35,7 +35,4 @@ void Renderer::Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& 
 
 }
 
-void Renderer::DrawText(const Font & font, const Shader & shader, std::string text) const
-{
 
-}

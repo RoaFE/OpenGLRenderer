@@ -33,6 +33,8 @@ public:
 	void SetFontSize(float size);
 
 	void RenderText(Shader &s, std::string text, float x, float y, float scale, glm::vec3 colour);
+	std::map<char, Character> GetCharacters() { return Characters; }
+
 
 private:
 	FT_Library ft;

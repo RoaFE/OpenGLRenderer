@@ -21,6 +21,10 @@ test::TestFont::TestFont()
 	font = new Font();
 	font->LoadFont("res/fonts/arial.ttf");
 
+	text = new Text();
+	text->SetFont(*font);
+	text->SetText("Hello");
+
 }
 
 test::TestFont::~TestFont()
@@ -92,8 +96,9 @@ void test::TestFont::OnRenderUI()
 
 	glm::mat4 proj = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
 	m_TextShader->SetUniformMat4f("u_MVP", proj);
-	font->RenderText(*m_TextShader, "This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
-	font->RenderText(*m_TextShader, "(C) LearnOpenGL.com", 540.0f, 570.0f, 0.5f, glm::vec3(0.3, 0.7f, 0.9f));
+	text->Draw(*m_TextShader, "This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
+	text->Draw(*m_TextShader, "(C) LearnOpenGL.com", 540.0f, 570.0f, 0.5f, glm::vec3(0.3, 0.7f, 0.9f));
+	text->Draw(*m_TextShader);
 
 }
 
