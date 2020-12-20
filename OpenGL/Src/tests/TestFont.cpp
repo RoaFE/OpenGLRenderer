@@ -79,12 +79,14 @@ void test::TestFont::OnRender()
 void test::TestFont::OnImGuiRender()
 {
 	ImGui::ColorEdit4("clear Colour", m_ClearColour);
+	ImGui::ColorEdit3("Text Colour", &text->m_Colour[0]);
 	{
-		
-		
-		// Edit 1 float using a slider from 0.0f to 1.0f
-		//ImGui::DragFloat3("CameraPos", &translation.x, 0.1f, -20.f, 960.0f);
+		char char_array[256];
+		strcpy_s(char_array, text->m_Text.c_str());
+		ImGui::InputText("Text", char_array, 256);
+		text->m_Text = (char_array);
 	}
+
 }
 
 

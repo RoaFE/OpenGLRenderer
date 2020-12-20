@@ -44,6 +44,7 @@ namespace test {
 			std::cout << "Registering test " << name << std::endl;
 
 			m_Tests.push_back(std::make_pair(name, []() {return new T(); }));
+			m_Tests[m_Tests.size() - 1].second()->SetWindow(m_Window);
 		}
 
 	private:

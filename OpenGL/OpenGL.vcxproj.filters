@@ -96,6 +96,15 @@
     <ClCompile Include="Src\Text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\tests\TestDepthTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\tests\TestStencil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\RowUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
@@ -502,6 +511,8 @@
       <Filter>Header Files</Filter>
     </None>
     <None Include="res\shaders\Text.shader" />
+    <None Include="res\shaders\Depth.Shader" />
+    <None Include="res\shaders\OutlineStencil.Shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Renderer.h">
@@ -1324,6 +1335,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\Text.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\tests\TestDepthTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\tests\TestStencil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\RowUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,5 @@
-#ifndef TestCube_H
-#define TestCube_H
+#ifndef TestStencil_H
+#define TestStencil_H
 
 #include "Test.h"
 
@@ -15,13 +15,17 @@
 #include "gameObjects/GameObject.h"
 #include "gameObjects/Mesh.h"
 #include "Camera.h"
+
+#include <vector>
+
+
 namespace test {
 
-	class TestCube : public Test
+	class TestStencil : public Test
 	{
 	public:
-		TestCube();
-		~TestCube();
+		TestStencil();
+		~TestStencil();
 
 
 		void OnUpdate(float dt) override;
@@ -40,8 +44,9 @@ namespace test {
 		float m_FoV;
 
 		Shader* m_Shader;
+		Shader* m_StencilShader;
 		Texture* m_Texture;
-		GameObject cube;
+		std::vector<GameObject*> cubes;
 		Mesh cubeMesh;
 
 		Camera cam;

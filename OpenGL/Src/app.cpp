@@ -28,6 +28,9 @@
 #include "tests/TestSolarSystem.h"
 #include "tests/TestMeshes.h"
 #include "tests/TestFont.h"
+#include "tests/TestRenderTexture.h"
+#include "tests/TestDepthTest.h"
+#include "tests/TestStencil.h"
 
 double yScroll;
 
@@ -132,11 +135,13 @@ int main(void)
 		currentTest = testMenu;
 
 		//testMenu->RegisterTest<test::TestClearColour> ("Clear Colour");
-		//testMenu->RegisterTest<test::TestQuads>("Test Quad");
-		//testMenu->RegisterTest<test::TestCube>("Test Cube");
+		//testMenu->RegisterTest<test::TestDepthTest>("Test Cube");
 		testMenu->RegisterTest<test::TestCube>("Test Cube");
 		testMenu->RegisterTest<test::Test2Body>("Test 2 Body");
 		testMenu->RegisterTest<test::TestFont>("Test Font");
+		testMenu->RegisterTest<test::TestQuads>("Test Texture");
+		testMenu->RegisterTest<test::TestDepthTest>("Test Depth Test");
+		testMenu->RegisterTest<test::TestStencil>("Test Outline/Stencil");
 		//testMenu->RegisterTest<test::TestSolarSystem>("Test Solar System");
 		//testMenu->RegisterTest<test::TestMeshes>("Test Mesh");
 		/* Loop until the user closes the window */
@@ -165,7 +170,7 @@ int main(void)
 			{
 				pressed = false;
 			}
-
+			
 			if (currentTest)
 			{
 				currentTest->ScrollCallBack(yScroll);
@@ -190,22 +195,22 @@ int main(void)
 						}
 						ImGui::SameLine(ImGui::GetWindowWidth() - 390.f);
 						ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-						if (ImGui::Button("F"))
-						{
-							fullscreen = !fullscreen;
-							if (fullscreen)
-							{
-								glfwMaximizeWindow(window);
-								glfwSetWindowSize(window, mode->width, mode->height);
-								glViewport(0, 0, mode->width, mode->height);
-							}
-							else
-							{
-								glfwRestoreWindow(window);
-								glfwSetWindowSize(window, 960, 540);
-								glViewport(0, 0, 960, 540);
-							}
-						}
+						//if (ImGui::Button("F"))
+						//{
+						//	fullscreen = !fullscreen;
+						//	if (fullscreen)
+						//	{
+						//		glfwMaximizeWindow(window);
+						//		glfwSetWindowSize(window, mode->width, mode->height);
+						//		glViewport(0, 0, mode->width, mode->height);
+						//	}
+						//	else
+						//	{
+						//		glfwRestoreWindow(window);
+						//		glfwSetWindowSize(window, 960, 540);
+						//		glViewport(0, 0, 960, 540);
+						//	}
+						//}
 						if (ImGui::Button("X"))
 						{
 							glfwSetWindowShouldClose(window, GLFW_TRUE);

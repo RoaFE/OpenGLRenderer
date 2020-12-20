@@ -23,6 +23,7 @@ void Text::SetFont(Font font)
 	m_Font = font;
 }
 
+
 void Text::Draw(Shader & shader)
 {
 	shader.Bind();

@@ -129,15 +129,18 @@
     <ClCompile Include="Src\Font.cpp" />
     <ClCompile Include="Src\gameObjects\GameObject.cpp" />
     <ClCompile Include="Src\gameObjects\Mesh.cpp" />
+    <ClCompile Include="Src\RowUtil.cpp" />
     <ClCompile Include="Src\tests\Test.cpp" />
     <ClCompile Include="Src\tests\Test2Body.cpp" />
     <ClCompile Include="Src\tests\TestClearColour.cpp" />
     <ClCompile Include="Src\tests\TestCube.cpp" />
+    <ClCompile Include="Src\tests\TestDepthTest.cpp" />
     <ClCompile Include="Src\tests\TestFont.cpp" />
     <ClCompile Include="Src\tests\TestMeshes.cpp" />
     <ClCompile Include="Src\tests\TestQuads.cpp" />
     <ClCompile Include="Src\tests\TestRenderTexture.cpp" />
     <ClCompile Include="Src\tests\TestSolarSystem.cpp" />
+    <ClCompile Include="Src\tests\TestStencil.cpp" />
     <ClCompile Include="Src\vendor\imgui\imgui.cpp" />
     <ClCompile Include="Src\vendor\imgui\imgui_demo.cpp" />
     <ClCompile Include="Src\vendor\imgui\imgui_draw.cpp" />
@@ -155,6 +158,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
+    <None Include="res\shaders\Depth.Shader" />
+    <None Include="res\shaders\OutlineStencil.Shader" />
     <None Include="res\shaders\Text.shader" />
     <None Include="Src\vendor\glm\detail\func_common.inl" />
     <None Include="Src\vendor\glm\detail\func_common_simd.inl" />
@@ -298,15 +303,18 @@
     <ClInclude Include="Src\gameObjects\Mesh.h" />
     <ClInclude Include="Src\rowMath\NumericalSolution.h" />
     <ClInclude Include="Src\rowMath\rowMath.h" />
+    <ClInclude Include="Src\RowUtil.h" />
     <ClInclude Include="Src\tests\Test2Body.h" />
     <ClInclude Include="Src\tests\TestClearColour.h" />
     <ClInclude Include="Src\tests\Test.h" />
     <ClInclude Include="Src\tests\TestCube.h" />
+    <ClInclude Include="Src\tests\TestDepthTest.h" />
     <ClInclude Include="Src\tests\TestFont.h" />
     <ClInclude Include="Src\tests\TestMeshes.h" />
     <ClInclude Include="Src\tests\TestQuads.h" />
     <ClInclude Include="Src\tests\TestRenderTexture.h" />
     <ClInclude Include="Src\tests\TestSolarSystem.h" />
+    <ClInclude Include="Src\tests\TestStencil.h" />
     <ClInclude Include="Src\Text.h" />
     <ClInclude Include="Src\vendor\imgui\imconfig.h" />
     <ClInclude Include="Src\vendor\imgui\imgui.h" />

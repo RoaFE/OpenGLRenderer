@@ -1,5 +1,5 @@
-#ifndef TestCube_H
-#define TestCube_H
+#ifndef TestDepthTest_H
+#define TestDepthTest_H
 
 #include "Test.h"
 
@@ -15,13 +15,17 @@
 #include "gameObjects/GameObject.h"
 #include "gameObjects/Mesh.h"
 #include "Camera.h"
+
+#include <vector>
+
+
 namespace test {
 
-	class TestCube : public Test
+	class TestDepthTest : public Test
 	{
 	public:
-		TestCube();
-		~TestCube();
+		TestDepthTest();
+		~TestDepthTest();
 
 
 		void OnUpdate(float dt) override;
@@ -41,6 +45,7 @@ namespace test {
 
 		Shader* m_Shader;
 		Texture* m_Texture;
+		std::vector<GameObject*> cubes;
 		GameObject cube;
 		Mesh cubeMesh;
 

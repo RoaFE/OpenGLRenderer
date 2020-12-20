@@ -21,6 +21,8 @@ test::TestQuads::TestQuads()
 	GLCall(glEnable(GL_BLEND));
 	GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
+	
+
 	m_VAO = new VertexArray;
 	m_VB = new VertexBuffer(positions, 4 * 4 * sizeof(float));
 

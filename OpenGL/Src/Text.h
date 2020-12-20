@@ -1,5 +1,6 @@
 #pragma once
-#include "glm/common.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtx/transform.hpp"
 
 #include "VertexBuffer.h"
 #include "VertexBufferLayout.h"
@@ -33,13 +34,13 @@ public:
 	void Draw(Shader& shader);
 	void Draw(Shader& shader, std::string text, float x, float y, float scale, glm::vec3 colour);
 
-
-private:
-
 	std::string m_Text;
 	glm::vec2 m_Pos;
 	glm::vec3 m_Colour;
+	glm::mat4 m_LocalTransform;
 	float m_Scale;
+
+private:
 	Font m_Font;
 
 	VertexArray* m_VAO;
