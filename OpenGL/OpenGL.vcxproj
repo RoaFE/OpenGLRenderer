@@ -76,12 +76,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;src\vendor;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\FreeText\include;$(SolutionDir)Dependencies\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src\vendor;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\FreeText\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\Assimp\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2017;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32;$(SolutionDir)Dependencies\FreeText\releaseStatic\Win32</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;Gdi32.lib;Shell32.lib;glew32s.lib;freetype.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2017;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32;$(SolutionDir)Dependencies\FreeText\releaseStatic\Win32;$(SolutionDir)Dependencies\Assimp\lib\Win32</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;Gdi32.lib;Shell32.lib;glew32s.lib;freetype.lib;assimp.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -129,6 +129,7 @@
     <ClCompile Include="Src\Font.cpp" />
     <ClCompile Include="Src\gameObjects\GameObject.cpp" />
     <ClCompile Include="Src\gameObjects\Mesh.cpp" />
+    <ClCompile Include="Src\gameObjects\Model.cpp" />
     <ClCompile Include="Src\RowUtil.cpp" />
     <ClCompile Include="Src\tests\Test.cpp" />
     <ClCompile Include="Src\tests\Test2Body.cpp" />
@@ -301,6 +302,7 @@
     <ClInclude Include="Src\Font.h" />
     <ClInclude Include="Src\gameObjects\GameObject.h" />
     <ClInclude Include="Src\gameObjects\Mesh.h" />
+    <ClInclude Include="Src\gameObjects\Model.h" />
     <ClInclude Include="Src\rowMath\NumericalSolution.h" />
     <ClInclude Include="Src\rowMath\rowMath.h" />
     <ClInclude Include="Src\RowUtil.h" />

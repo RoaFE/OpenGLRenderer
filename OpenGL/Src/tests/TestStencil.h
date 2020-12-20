@@ -15,7 +15,7 @@
 #include "gameObjects/GameObject.h"
 #include "gameObjects/Mesh.h"
 #include "Camera.h"
-
+#include "RowUtil.h"
 #include <vector>
 
 
@@ -48,6 +48,7 @@ namespace test {
 		Texture* m_Texture;
 		std::vector<GameObject*> cubes;
 		Mesh cubeMesh;
+		Mesh quad;
 
 		Camera cam;
 

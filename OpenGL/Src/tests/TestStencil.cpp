@@ -11,21 +11,27 @@ test::TestStencil::TestStencil()
 
 
 	cubeMesh.CreateCube();
+	quad.CreateQuad();
 	
 	for (int o = 0; o < 6; o++)
 	{
 		float x, y, z;
 		float i, j, k;
+		float r, b, g;
 
 		x = (float)(rand() % 100 - 50) / 10.f;
 		y = (float)(rand() % 100 - 50) / 10.f;
 		z = (float)(rand() % 100 - 50) / 10.f;
 
+		r = (float)(rand() % 100) / 100.f;
+		g = (float)(rand() % 100) / 100.f;
+		b = (float)(rand() % 100) / 100.f;
+
 		i = (float)(rand() % 200 - 100) / 100.f;
 		j = (float)(rand() % 200 - 100) / 100.f;
 		k = (float)(rand() % 200 - 100) / 100.f;
 
-		GameObject* object = new GameObject(row::vector3(x,y,z),glm::vec3(1,1,1),1,row::vector3(0,0,0),glm::vec4(i,j,k,1),"Oof");
+		GameObject* object = new GameObject(row::vector3(x,y,z),glm::vec3(1,1,1),1,row::vector3(0,0,0),glm::vec4(r,g,b,1),"Oof");
 		object->SetRotation(glm::vec4(i, j, k, 1));
 		object->SetMesh(&cubeMesh);
 		object->BuildTransform();
@@ -108,6 +114,7 @@ void test::TestStencil::OnRender()
 	Renderer renderer;
 
 
+	
 	GLCall(glClearColor(m_ClearColour[0], m_ClearColour[1], m_ClearColour[2], m_ClearColour[3]));
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
@@ -134,7 +141,7 @@ void test::TestStencil::OnRender()
 			m_Shader->SetUniform4f("u_Colour", colour.x, colour.y, colour.z, 1.0);
 
 			m_Shader->SetUniformMat4f("u_MVP", mvp);
-			renderer.Draw(*cubes[i]->GetMesh()->GetVAO(), *cubes[i]->GetMesh()->GetIB(), *m_Shader);
+			cubes[i]->GetMesh()->Draw(*m_Shader);
 		}
 
 
@@ -144,7 +151,7 @@ void test::TestStencil::OnRender()
 
 		for (int i = 0; i < 6; i++)
 		{
-			cubes[i]->SetScale(glm::vec3(1.1, 1.1, 1.1));
+			cubes[i]->SetScale(glm::vec3(1.05, 1.05, 1.05));
 			cubes[i]->BuildTransform();
 
 			glm::mat4 model = cubes[i]->GetTransform();
@@ -152,10 +159,17 @@ void test::TestStencil::OnRender()
 
 			//m_Shader->SetUniform4f("u_Colour", colour.x, colour.y, colour.z, 1.0);
 
+			glm::vec3 hsl = rowUtil::RGBtoHSL(cubes[i]->GetColour());
+			hsl.r -= 0.5;
+			if (hsl.r < 0)
+				hsl.r + 1.f;
+			glm::vec3 rgb = rowUtil::HSLtoRGB(hsl);
 
 			m_StencilShader->Bind();
+			m_StencilShader->SetUniform4f("u_Colour", rgb.x, rgb.y, rgb.z, 1.0);
 			m_StencilShader->SetUniformMat4f("u_MVP", mvp);
-			renderer.Draw(*cubes[i]->GetMesh()->GetVAO(), *cubes[i]->GetMesh()->GetIB(), *m_StencilShader);
+			cubes[i]->GetMesh()->Draw(*m_StencilShader);
+
 
 		}
 

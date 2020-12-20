@@ -9,6 +9,15 @@ Mesh::Mesh()
 
 }
 
+Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices)
+	:m_VAO(nullptr), m_VB(nullptr), m_IB(nullptr)
+{
+	m_Vertices = vertices;
+	m_Indices = indices;
+
+	SetupMesh();
+}
+
 Mesh::~Mesh()
 {
 	if (m_VAO)
@@ -32,6 +41,49 @@ Mesh::~Mesh()
 
 void Mesh::CreateCube()
 {
+	Vertex vertex;
+	// 0	Front bottom left
+	vertex.Position = glm::vec3(-1.f, -1.f, 1.0f);
+	vertex.Normal = glm::vec3(-1.f, -1.f, 1.0f);
+	vertex.TexCoords = glm::vec2(0.f, 1.f);
+	m_Vertices.push_back(vertex);
+	// 1	Front bottom right
+	vertex.Position = glm::vec3(1.f, -1.f, 1.0f);
+	vertex.Normal = glm::vec3(1.f, -1.f, 1.0f);
+	vertex.TexCoords = glm::vec2(1.f, 1.f);
+	m_Vertices.push_back(vertex);
+	// 2	Front top right
+	vertex.Position = glm::vec3(1.f, 1.f, 1.0f);
+	vertex.Normal = glm::vec3(1.f, 1.f, 1.0f);
+	vertex.TexCoords = glm::vec2(1.f, 0.f);
+	m_Vertices.push_back(vertex);
+	// 3	Front top left
+	vertex.Position = glm::vec3(-1.f, 1.f, 1.0f);
+	vertex.Normal = glm::vec3(-1.f, 1.f, 1.0f);
+	vertex.TexCoords = glm::vec2(0.f, 0.f);
+	m_Vertices.push_back(vertex);
+	// 4	Back bottom left
+	vertex.Position = glm::vec3(-1.f, -1.f, -1.0f);
+	vertex.Normal = glm::vec3(-1.f, -1.f, -1.0f);
+	vertex.TexCoords = glm::vec2(0.f, 1.f);
+	m_Vertices.push_back(vertex);
+	// 5	Back bottom right
+	vertex.Position = glm::vec3(1.f, -1.f, -1.0f);
+	vertex.Normal = glm::vec3(1.f, -1.f, -1.0f);
+	vertex.TexCoords = glm::vec2(1.f, 1.f);
+	m_Vertices.push_back(vertex);
+	// 6	Back top right
+	vertex.Position = glm::vec3(1.f, 1.f, -1.0f);
+	vertex.Normal = glm::vec3(1.f, 1.f, -1.0f);
+	vertex.TexCoords = glm::vec2(1.f, 0.f);
+	m_Vertices.push_back(vertex);
+	// 7	Back top left
+	vertex.Position = glm::vec3(-1.f, 1.f, -1.0f);
+	vertex.Normal = glm::vec3(-1.f, 1.f, -1.0f);
+	vertex.TexCoords = glm::vec2(0.f, 0.f);
+	m_Vertices.push_back(vertex);
+
+
 	float positions[] = {
 		-1.f, -1.f,  1.0f,	// 0	Front bottom left
 		 1.f, -1.f,  1.0f,	// 1	Front bottom right
@@ -43,7 +95,7 @@ void Mesh::CreateCube()
 		-1.f,  1.f, -1.0f,	// 7	Back top left
 	};
 
-	unsigned int indices[] = {
+	m_Indices = {
 		0, 1, 2,
 		2, 3, 0,	//Front Face
 		1, 5, 6,
@@ -59,14 +111,54 @@ void Mesh::CreateCube()
 	};
 
 	m_VAO = new VertexArray;
-	m_VB = new VertexBuffer(positions, 3 * 8 * sizeof(float));
+	m_VB = new VertexBuffer(m_Vertices.data(), m_Vertices.size() * sizeof(Vertex));
 
 	VertexBufferLayout layout;
 	layout.Push<float>(3);
+	layout.Push<float>(3);
+	layout.Push<float>(2);
 
 	m_VAO->AddBuffer(*m_VB, layout);
 	//index buffer object (ibo)
-	m_IB = new IndexBuffer(indices, 36);
+	m_IB = new IndexBuffer(m_Indices.data(), m_Indices.size());
+}
+
+void Mesh::CreateQuad()
+{
+	Vertex vertex;
+	// 0	Front bottom left
+	vertex.Position = glm::vec3(-1.f, -1.f, 1.0f);
+	vertex.Normal = glm::vec3(0.f, 0.f, 1.0f);
+	vertex.TexCoords = glm::vec2(0.f, 1.f);
+	m_Vertices.push_back(vertex);
+	// 1	Front bottom right
+	vertex.Position = glm::vec3(1.f, -1.f, 1.0f);
+	vertex.TexCoords = glm::vec2(1.f, 1.f);
+	m_Vertices.push_back(vertex);
+	// 2	Front top right
+	vertex.Position = glm::vec3(1.f, 1.f, 1.0f);
+	vertex.TexCoords = glm::vec2(1.f, 0.f);
+	m_Vertices.push_back(vertex);
+	// 3	Front top left
+	vertex.Position = glm::vec3(-1.f, 1.f, 1.0f);
+	vertex.TexCoords = glm::vec2(0.f, 0.f);
+	m_Vertices.push_back(vertex);
+
+
+	m_Indices = { 0, 1, 2, 2, 3, 0 };
+
+	m_VAO = new VertexArray;
+	m_VB = new VertexBuffer(m_Vertices.data(), m_Vertices.size() * sizeof(Vertex));
+
+	VertexBufferLayout layout;
+	layout.Push<float>(3);
+	layout.Push<float>(3);
+	layout.Push<float>(2);
+
+	m_VAO->AddBuffer(*m_VB, layout);
+	//index buffer object (ibo)
+	m_IB = new IndexBuffer(m_Indices.data(), m_Indices.size());
+
 }
 
 void Mesh::CreateSphere(float r, int lon, int lat)
@@ -146,4 +238,47 @@ void Mesh::CreateSphere(float r, int lon, int lat)
 	m_VAO->AddBuffer(*m_VB, layout);
 	//index buffer object (ibo)
 	m_IB = new IndexBuffer(indices.data(), indices.size());
+}
+
+void Mesh::Draw(Shader & shader)
+{
+	unsigned int diffuseNr = 1;
+	unsigned int specularNr = 1;
+	//for (unsigned int i = 0; i < textures.size(); i++)
+	//{
+	//	glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
+	//	// retrieve texture number (the N in diffuse_textureN)
+	//	std::string number;
+	//	std::string name = textures[i].type;
+	//	if (name == "texture_diffuse")
+	//		number = std::to_string(diffuseNr++);
+	//	else if (name == "texture_specular")
+	//		number = std::to_string(specularNr++);
+
+	//	shader.SetUniform1f(("material." + name + number).c_str(), i);
+	//	glBindTexture(GL_TEXTURE_2D, textures[i].id);
+	//}
+	//glActiveTexture(GL_TEXTURE0);
+
+	// draw mesh
+	m_VAO->Bind();
+	m_IB->Bind();
+	glDrawElements(GL_TRIANGLES, m_IB->GetCount(), GL_UNSIGNED_INT, 0);
+	m_IB->Unbind();
+	m_VAO->Unbind();
+}
+
+void Mesh::SetupMesh()
+{
+	m_VAO = new VertexArray;
+	m_VB = new VertexBuffer(m_Vertices.data(), m_Vertices.size() * sizeof(Vertex));
+
+	VertexBufferLayout layout;
+	layout.Push<float>(3);
+	layout.Push<float>(3);
+	layout.Push<float>(2);
+
+	m_VAO->AddBuffer(*m_VB, layout);
+	//index buffer object (ibo)
+	m_IB = new IndexBuffer(m_Indices.data(), m_Indices.size());
 }
