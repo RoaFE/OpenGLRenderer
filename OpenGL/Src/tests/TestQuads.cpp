@@ -91,7 +91,7 @@ void test::TestQuads::OnRender()
 
 	Renderer renderer;
 
-	m_Texture->Bind(0);
+	m_Texture->Bind();
 
 
 	GLCall(glClearColor(m_ClearColour[0], m_ClearColour[1], m_ClearColour[2], m_ClearColour[3]));
