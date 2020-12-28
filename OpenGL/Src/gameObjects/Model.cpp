@@ -6,6 +6,25 @@ void Model::Draw(Shader & shader)
 		meshes[i].Draw(shader);
 }
 
+void Model::Destroy()
+{
+	for (Texture* texture : textures_loaded)
+	{
+		if (texture)
+		{
+			delete texture;
+			texture = nullptr;
+		}
+	}
+
+	textures_loaded.clear();
+
+	for (int i = 0; i < meshes.size(); i++)
+	{
+		meshes[i].Destroy();
+	}
+}
+
 void Model::loadModel(std::string path)
 {
 	Assimp::Importer import;
@@ -41,7 +60,7 @@ Mesh Model::ProcessMesh(aiMesh * mesh, const aiScene * scene)
 {
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
-	std::vector<Texture> textures;
+	std::vector<Texture*> textures;
 
 
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++)
@@ -82,9 +101,9 @@ Mesh Model::ProcessMesh(aiMesh * mesh, const aiScene * scene)
 	if (mesh->mMaterialIndex >= 0)
 	{
 		aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
-		std::vector<Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+		std::vector<Texture*> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
 		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-		std::vector<Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
+		std::vector<Texture*> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 	}
 
@@ -95,9 +114,9 @@ Mesh Model::ProcessMesh(aiMesh * mesh, const aiScene * scene)
 	return loadedmesh;*/
 }
 
-std::vector<Texture> Model::loadMaterialTextures(aiMaterial * mat, aiTextureType type, std::string typeName)
+std::vector<Texture*> Model::loadMaterialTextures(aiMaterial * mat, aiTextureType type, std::string typeName)
 {
-	std::vector<Texture> textures;
+	std::vector<Texture*> textures;
 	for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
 	{
 		aiString str;
@@ -105,7 +124,7 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial * mat, aiTextureType
 		bool skip = false;
 		for (unsigned int j = 0; j < textures_loaded.size(); j++)
 		{
-			if (std::strcmp(textures_loaded[j].m_FileName.data(), str.C_Str()) == 0)
+			if (std::strcmp(textures_loaded[j]->m_FileName.data(), str.C_Str()) == 0)
 			{
 				textures.push_back(textures_loaded[j]);
 				skip = true;
@@ -114,8 +133,8 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial * mat, aiTextureType
 		}
 		if (!skip)
 		{
-			Texture texture(directory, str.C_Str());
-			texture.type = typeName;
+			Texture* texture = new Texture(directory, str.C_Str());
+			texture->type = typeName;
 			textures.push_back(texture);
 			textures_loaded.push_back(texture);
 		}

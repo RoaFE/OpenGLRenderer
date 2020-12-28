@@ -44,7 +44,7 @@ test::TestQuads::TestQuads()
 
 
 
-	m_Texture = new Texture("res/textures/","Oh.png");
+	m_Texture = new Texture("res/models/backpack","diffuse.jpg");
 	m_Shader->SetUniform1i("u_Texture", 0);
 }
 
@@ -91,6 +91,7 @@ void test::TestQuads::OnRender()
 
 	Renderer renderer;
 
+	m_Texture->Active();
 	m_Texture->Bind();
 
 

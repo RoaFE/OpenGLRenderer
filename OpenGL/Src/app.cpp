@@ -142,7 +142,7 @@ int main(void)
 		testMenu->RegisterTest<test::TestFont>("Test Font");
 		testMenu->RegisterTest<test::TestQuads>("Test Texture");
 		testMenu->RegisterTest<test::TestDepthTest>("Test Depth Test");
-		testMenu->RegisterTest<test::TestStencil>("Test Outline/Stencil");
+		//testMenu->RegisterTest<test::TestStencil>("Test Outline/Stencil");
 		testMenu->RegisterTest<test::TestModel>("Test Model");
 		//testMenu->RegisterTest<test::TestSolarSystem>("Test Solar System");
 		//testMenu->RegisterTest<test::TestMeshes>("Test Mesh");

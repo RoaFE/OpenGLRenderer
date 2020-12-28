@@ -12,11 +12,16 @@ test::TestModel::TestModel()
 
 	m_Model = new Model("res/models/backpack/backpack.obj");
 	
+	m_Texture = new Texture("res/models/backpack", "diffuse.jpg");
 
-
+	
 
 
 	m_Shader = new Shader("res/shaders/BasicModel.shader");
+
+	m_Shader->Bind();
+	//m_Shader->SetUniform1f("texture_diffuse1", 0);
+
 }
 
 test::TestModel::~TestModel()
@@ -78,6 +83,8 @@ void test::TestModel::OnRender()
 
 	GLCall(glEnable(GL_DEPTH_TEST));
 	glDepthFunc(GL_LESS);
+
+	//m_Texture->Bind(0);
 
 	{
 		{

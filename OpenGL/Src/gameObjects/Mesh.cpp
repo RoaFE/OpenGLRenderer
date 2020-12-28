@@ -3,34 +3,31 @@
 
 
 Mesh::Mesh()
-	:m_VAO(nullptr), m_VB(nullptr), m_IB(nullptr)
+	:m_VAO(nullptr), m_VB(nullptr), m_IB(nullptr), m_Setup(false)
 {
 	
 
 }
 
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices)
-	:m_VAO(nullptr), m_VB(nullptr), m_IB(nullptr)
+	:m_VAO(nullptr), m_VB(nullptr), m_IB(nullptr), m_Setup(false)
 {
 	m_Vertices = vertices;
 	m_Indices = indices;
 
-	SetupMesh();
 }
 
-Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
+Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture*> textures)
 {
 	m_Textures = textures;
 
 	m_Vertices = vertices;
 	m_Indices = indices;
-
-	SetupMesh();
 }
 
 Mesh::~Mesh()
 {
-	/*if (m_VAO)
+	if (m_VAO)
 	{
 		delete m_VAO;
 		m_VAO = nullptr;
@@ -46,7 +43,7 @@ Mesh::~Mesh()
 	{
 		delete m_VB;
 		m_VB = nullptr;
-	}*/
+	}
 }
 
 void Mesh::CreateCube()
@@ -252,6 +249,8 @@ void Mesh::CreateSphere(float r, int lon, int lat)
 
 void Mesh::Draw(Shader & shader)
 {
+	if (!m_Setup)
+		SetupMesh();
 	// bind appropriate textures
 	unsigned int diffuseNr = 1;
 	unsigned int specularNr = 1;
@@ -259,21 +258,22 @@ void Mesh::Draw(Shader & shader)
 	unsigned int heightNr = 1;
 	for (unsigned int i = 0; i < m_Textures.size(); i++)
 	{
-		m_Textures[i].Active(i); // activate proper texture unit before binding
+		m_Textures[i]->Active(i); // activate proper texture unit before binding
 		// retrieve texture number (the N in diffuse_textureN)
 		std::string number;
-		std::string name = m_Textures[i].type;
+		std::string name = m_Textures[i]->type;
 		if (name == "texture_diffuse")
 			number = std::to_string(diffuseNr++);
 		else if (name == "texture_specular")
-			number = std::to_string(specularNr++); // transfer unsigned int to stream
+			continue;
+			//number = std::to_string(specularNr++); // transfer unsigned int to stream
 		else if (name == "texture_normal")
 			number = std::to_string(normalNr++); // transfer unsigned int to stream
 		else if (name == "texture_height")
 			number = std::to_string(heightNr++); // transfer unsigned int to stream
 
 		shader.SetUniform1f((name + number).c_str(), i);
-		m_Textures[i].Bind();
+		m_Textures[i]->Bind();
 	}
 
 	// draw mesh
@@ -283,11 +283,25 @@ void Mesh::Draw(Shader & shader)
 	m_IB->Unbind();
 	m_VAO->Unbind();
 
-	glActiveTexture(GL_TEXTURE0);
+	//glActiveTexture(GL_TEXTURE0);
+}
+
+void Mesh::Destroy()
+{
+	for (Texture* texture : m_Textures)
+	{
+		if (texture)
+		{
+			delete texture;
+			texture = nullptr;
+		}
+		m_Textures.clear();
+	}
 }
 
 void Mesh::SetupMesh()
 {
+	m_Setup = true;
 	m_VAO = new VertexArray;
 	m_VB = new VertexBuffer(m_Vertices.data(), m_Vertices.size() * sizeof(Vertex));
 

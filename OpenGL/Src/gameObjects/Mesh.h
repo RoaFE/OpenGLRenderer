@@ -28,7 +28,7 @@ class Mesh
 public:
 	Mesh();
 	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices);
-	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
+	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture*> textures);
 	~Mesh();
 
 	VertexArray* GetVAO() { return m_VAO; };
@@ -39,10 +39,13 @@ public:
 	void CreateSphere(float radius = 1.f, int longitude = 10, int latitutde = 10);
 
 	void Draw(Shader &shader);
+	void SetupMesh();
+
+	void Destroy();
 
 	std::vector<Vertex> m_Vertices;
 	std::vector<unsigned int> m_Indices;
-	std::vector<Texture> m_Textures;
+	std::vector<Texture*> m_Textures;
 
 
 protected:
@@ -51,6 +54,7 @@ protected:
 	VertexBuffer* m_VB;
 	IndexBuffer* m_IB;
 
-	void SetupMesh();
+	bool m_Setup;
+
 
 };

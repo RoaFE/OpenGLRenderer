@@ -18,15 +18,18 @@ public:
 		loadModel(path);
 	}
 	void Draw(Shader &shader);
+
+	void Destroy();
+
 private:
 	// model data
 	std::vector<Mesh> meshes;
 	std::string directory;
 
-	std::vector<Texture> textures_loaded;
+	std::vector<Texture*> textures_loaded;
 
 	void loadModel(std::string path);
 	void ProcessNode(aiNode *node, const aiScene *scene);
 	Mesh ProcessMesh(aiMesh *mesh, const aiScene *scene);
-	std::vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName);
+	std::vector<Texture*> loadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName);
 };
