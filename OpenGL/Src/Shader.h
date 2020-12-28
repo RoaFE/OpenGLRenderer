@@ -25,7 +25,7 @@ public:
 
 	void Bind() const;
 	void UnBind() const;
-
+	int GetId() { return m_RendererID; };
 	void Load(const std::string& filepath);
 
 	//set uniforms

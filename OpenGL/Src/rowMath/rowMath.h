@@ -102,18 +102,18 @@ namespace row
 	static glm::vec3 RowToGlm(row::vector3 rowVec)
 	{
 		glm::vec3 out;
-		out.x = rowVec.x;
-		out.y = rowVec.y;
-		out.z = rowVec.z;
+		out.x = (float)rowVec.x;
+		out.y = (float)rowVec.y;
+		out.z = (float)rowVec.z;
 		return out;
 	}
 
 	static row::vector3 GlmToRow(glm::vec3 glmVec)
 	{
 		row::vector3 out;
-		out.x = glmVec.x;
-		out.y = glmVec.y;
-		out.z = glmVec.z;
+		out.x = (double)glmVec.x;
+		out.y = (double)glmVec.y;
+		out.z = (double) glmVec.z;
 		return out;
 	}
 

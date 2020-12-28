@@ -13,8 +13,11 @@
 #include <vector>
 
 struct Vertex {
+	// position
 	glm::vec3 Position;
+	// normal
 	glm::vec3 Normal;
+	// texCoords
 	glm::vec2 TexCoords;
 };
 
@@ -25,6 +28,7 @@ class Mesh
 public:
 	Mesh();
 	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices);
+	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
 	~Mesh();
 
 	VertexArray* GetVAO() { return m_VAO; };
@@ -38,6 +42,7 @@ public:
 
 	std::vector<Vertex> m_Vertices;
 	std::vector<unsigned int> m_Indices;
+	std::vector<Texture> m_Textures;
 
 
 protected:

@@ -100,14 +100,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;src\vendor;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src\vendor;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\FreeText\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\Assimp\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2017;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;Gdi32.lib;Shell32.lib;glew32s.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2017;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32;$(SolutionDir)Dependencies\FreeText\releaseStatic\Win32;$(SolutionDir)Dependencies\Assimp\lib\Win32</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;Gdi32.lib;Shell32.lib;glew32s.lib;freetype.lib;assimp.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,6 +138,7 @@
     <ClCompile Include="Src\tests\TestDepthTest.cpp" />
     <ClCompile Include="Src\tests\TestFont.cpp" />
     <ClCompile Include="Src\tests\TestMeshes.cpp" />
+    <ClCompile Include="Src\tests\TestModel.cpp" />
     <ClCompile Include="Src\tests\TestQuads.cpp" />
     <ClCompile Include="Src\tests\TestRenderTexture.cpp" />
     <ClCompile Include="Src\tests\TestSolarSystem.cpp" />
@@ -159,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
+    <None Include="res\shaders\BasicModel.Shader" />
     <None Include="res\shaders\Depth.Shader" />
     <None Include="res\shaders\OutlineStencil.Shader" />
     <None Include="res\shaders\Text.shader" />
@@ -313,6 +315,7 @@
     <ClInclude Include="Src\tests\TestDepthTest.h" />
     <ClInclude Include="Src\tests\TestFont.h" />
     <ClInclude Include="Src\tests\TestMeshes.h" />
+    <ClInclude Include="Src\tests\TestModel.h" />
     <ClInclude Include="Src\tests\TestQuads.h" />
     <ClInclude Include="Src\tests\TestRenderTexture.h" />
     <ClInclude Include="Src\tests\TestSolarSystem.h" />

@@ -6,7 +6,7 @@ test::TestStencil::TestStencil()
 {
 
 	
-	srand(time(0));
+	srand((unsigned int)time(0));
 
 
 
@@ -110,10 +110,6 @@ void test::TestStencil::OnUpdate(float dt)
 
 void test::TestStencil::OnRender()
 {
-
-	Renderer renderer;
-
-
 	
 	GLCall(glClearColor(m_ClearColour[0], m_ClearColour[1], m_ClearColour[2], m_ClearColour[3]));
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -162,7 +158,7 @@ void test::TestStencil::OnRender()
 			glm::vec3 hsl = rowUtil::RGBtoHSL(cubes[i]->GetColour());
 			hsl.r -= 0.5;
 			if (hsl.r < 0)
-				hsl.r + 1.f;
+				hsl.r += 1.f;
 			glm::vec3 rgb = rowUtil::HSLtoRGB(hsl);
 
 			m_StencilShader->Bind();

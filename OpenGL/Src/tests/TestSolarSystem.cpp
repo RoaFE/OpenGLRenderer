@@ -12,7 +12,7 @@ test::TestSolarSystem::TestSolarSystem()
 	//m_Body1.SetMass(5.9722 * pow(10,24));
 	//m_Body2.SetMass(7.342 * pow(10,22));
 	//scale the distance between planets
-	m_Scale = 4.17e9;
+	m_Scale = 4.17e9f;
 
 	m_Bodies.push_back(new GameObject(solar_system::sun));
 	m_Bodies.push_back(new GameObject(solar_system::mercury));
@@ -40,7 +40,7 @@ test::TestSolarSystem::TestSolarSystem()
 
 
 
-	m_Texture = new Texture("res/textures/Oh.png");
+	m_Texture = new Texture("res/textures","Oh.png");
 	m_Shader->SetUniform1i("u_Texture", 0);
 
 	//Calculate initial acceleration for bodies

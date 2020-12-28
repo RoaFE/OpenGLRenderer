@@ -44,7 +44,7 @@ test::TestQuads::TestQuads()
 
 
 
-	m_Texture = new Texture("res/textures/Oh.png");
+	m_Texture = new Texture("res/textures/","Oh.png");
 	m_Shader->SetUniform1i("u_Texture", 0);
 }
 
@@ -91,7 +91,7 @@ void test::TestQuads::OnRender()
 
 	Renderer renderer;
 
-	m_Texture->Bind();
+	m_Texture->Bind(0);
 
 
 	GLCall(glClearColor(m_ClearColour[0], m_ClearColour[1], m_ClearColour[2], m_ClearColour[3]));
@@ -102,8 +102,8 @@ void test::TestQuads::OnRender()
 	{
 		glm::mat4 model = glm::translate(glm::mat4(1.0f), m_Translation1);
 		glm::mat4 mvp = proj * view * model;
-		m_Shader->SetUniformMat4f("u_MVP", mvp);
 		m_Shader->Bind();
+		m_Shader->SetUniformMat4f("u_MVP", mvp);
 		renderer.Draw(*m_VAO, *m_IB, *m_Shader);
 	}
 
@@ -113,8 +113,8 @@ void test::TestQuads::OnRender()
 	{
 		glm::mat4 model = glm::translate(glm::mat4(1.0f), m_Translation2);
 		glm::mat4 mvp = proj * view * model;
-		m_Shader->SetUniformMat4f("u_MVP", mvp);
 		m_Shader->Bind();
+		m_Shader->SetUniformMat4f("u_MVP", mvp);
 		renderer.Draw(*m_VAO, *m_IB, *m_Shader);
 	}
 
@@ -129,7 +129,6 @@ void test::TestQuads::OnImGuiRender()
 		
 		ImGui::ColorEdit4("Colour1", &m_Quad1Colour.x);
 		ImGui::ColorEdit4("Colour2", &m_Quad2Colour.x);
-
 
 		// Edit 1 float using a slider from 0.0f to 1.0f
 		//ImGui::DragFloat3("CameraPos", &translation.x, 0.1f, -20.f, 960.0f);

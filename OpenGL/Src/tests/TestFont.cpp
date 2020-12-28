@@ -63,8 +63,6 @@ void test::TestFont::OnUpdate(float dt)
 
 void test::TestFont::OnRender()
 {
-	Renderer renderer;
-
 
 	GLCall(glClearColor(m_ClearColour[0], m_ClearColour[1], m_ClearColour[2], m_ClearColour[3]));
 	GLCall(glClear(GL_COLOR_BUFFER_BIT));
@@ -92,7 +90,7 @@ void test::TestFont::OnImGuiRender()
 
 void test::TestFont::OnRenderUI()
 {
-	Renderer renderer;
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 

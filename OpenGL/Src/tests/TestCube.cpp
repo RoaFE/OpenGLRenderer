@@ -18,7 +18,7 @@ test::TestCube::TestCube()
 
 
 
-	m_Texture = new Texture("res/textures/Oh.png");
+	m_Texture = new Texture("res/textures","Oh.png");
 	m_Shader->SetUniform1i("u_Texture", 0);
 }
 

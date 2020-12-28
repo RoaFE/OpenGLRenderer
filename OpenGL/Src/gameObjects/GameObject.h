@@ -57,16 +57,16 @@ private:
 
 namespace solar_system
 {
-	static GameObject sun(row::vector3(0, 0, 0), glm::vec3(7, 7, 7), 1.9885e30, row::vector3(0, 0, 0),glm::vec4(1.0, 0.3, 0.2, 1.0),"Sun");
-	static GameObject earth(row::vector3(1.5e11, 0, 0), glm::vec3(0.5, 0.5, 0.5), 5.9722e24, row::vector3(0, 0, 29744),glm::vec4(0.3, 0.8, 0.9, 1.0),"Earth");
-	static GameObject mars({ 2.2e11, 0, 0 }, glm::vec3(0.27, 0.27, 0.27), 2.4e24, { 0,0,24000 },glm::vec4(0.8, 0.5, 0.2, 1.0),"Mars");
-	static GameObject mercury({ 5.0e10, 0, 0 }, { 0.14,0.14,0.14 }, 3.285e23, { 0, 0, 47000 }, glm::vec4(0.8, 0.8, 0.8, 1.0), "Mercury");
-	static GameObject venus{ { 1.1e11, 0, 0 },{ 0.47,0.47,0.47 }, 4.8e24,{ 0, 0, 35000 },glm::vec4(0.68, 0.57, 0.12, 1.0), "Venus" };
-	static GameObject jupiter{ { 7.7e11,0,0 },{5.6,5.6,5.6 }, 1e28,{ 0,0,13000 },glm::vec4(0.67, 0.57, 0.12, 1.0), "Jupiter" };
-	static GameObject saturn{ { 1.4e12, 0, 0 },{4.7,4.7,4.7 }, 5.7e26,{ 0,0,9000 },glm::vec4(0.78, 0.67, 0.12, 1.0), "Saturn" };
-	static GameObject uranus { { 2.8e12, 0, 0 }, {2.0,2.0,2.0 }, 8.7e25,{ 0, 0, 6835},glm::vec4(0.0,0.6,0.9,1.0), "Uranus" };
-	static GameObject neptune { { 4.5e12, 0, 0 },{1.9,1.9,1.9 }, 1e26,{ 0,0,5477 },glm::vec4(0.0,0.5,0.8,1.0), "Neptune" };
-	static GameObject pluto({ 7.3e12, 0, 0 }, {0.09,0.09,0.09 }, 1.3e22,{ 0,0,4748 },glm::vec4(0.8,0.7,0.4,1.0), "Pluto" );
+	static GameObject sun(row::vector3(0, 0, 0), glm::vec3(7, 7, 7), (float)1.9885e30, row::vector3(0, 0, 0),glm::vec4(1.0, 0.3, 0.2, 1.0),"Sun");
+	static GameObject earth(row::vector3(1.5e11, 0, 0), glm::vec3(0.5, 0.5, 0.5), (float)5.9722e24, row::vector3(0, 0, 29744),glm::vec4(0.3, 0.8, 0.9, 1.0),"Earth");
+	static GameObject mars({ 2.2e11, 0, 0 }, glm::vec3(0.27, 0.27, 0.27), (float)2.4e24, { 0,0,24000 },glm::vec4(0.8, 0.5, 0.2, 1.0),"Mars");
+	static GameObject mercury({ 5.0e10, 0, 0 }, { 0.14,0.14,0.14 }, (float)3.285e23, { 0, 0, 47000 }, glm::vec4(0.8, 0.8, 0.8, 1.0), "Mercury");
+	static GameObject venus{ { 1.1e11, 0, 0 },{ 0.47,0.47,0.47 }, (float)4.8e24,{ 0, 0, 35000 },glm::vec4(0.68, 0.57, 0.12, 1.0), "Venus" };
+	static GameObject jupiter{ { 7.7e11,0,0 },{5.6,5.6,5.6 }, (float)1e28,{ 0,0,13000 },glm::vec4(0.67, 0.57, 0.12, 1.0), "Jupiter" };
+	static GameObject saturn{ { 1.4e12, 0, 0 },{4.7,4.7,4.7 }, (float)5.7e26,{ 0,0,9000 },glm::vec4(0.78, 0.67, 0.12, 1.0), "Saturn" };
+	static GameObject uranus { { 2.8e12, 0, 0 }, {2.0,2.0,2.0 }, (float)8.7e25,{ 0, 0, 6835},glm::vec4(0.0,0.6,0.9,1.0), "Uranus" };
+	static GameObject neptune { { 4.5e12, 0, 0 },{1.9,1.9,1.9 }, (float)1e26,{ 0,0,5477 },glm::vec4(0.0,0.5,0.8,1.0), "Neptune" };
+	static GameObject pluto({ 7.3e12, 0, 0 }, {0.09,0.09,0.09 }, (float)1.3e22,{ 0,0,4748 },glm::vec4(0.8,0.7,0.4,1.0), "Pluto" );
 }
 
 #endif

@@ -31,6 +31,7 @@
 #include "tests/TestRenderTexture.h"
 #include "tests/TestDepthTest.h"
 #include "tests/TestStencil.h"
+#include "tests/TestModel.h"
 
 double yScroll;
 
@@ -142,15 +143,16 @@ int main(void)
 		testMenu->RegisterTest<test::TestQuads>("Test Texture");
 		testMenu->RegisterTest<test::TestDepthTest>("Test Depth Test");
 		testMenu->RegisterTest<test::TestStencil>("Test Outline/Stencil");
+		testMenu->RegisterTest<test::TestModel>("Test Model");
 		//testMenu->RegisterTest<test::TestSolarSystem>("Test Solar System");
 		//testMenu->RegisterTest<test::TestMeshes>("Test Mesh");
 		/* Loop until the user closes the window */
 		float lastTime, currentTime, frameTime;
-		lastTime = glfwGetTime();
+		lastTime = (float)glfwGetTime();
 
 		while (!glfwWindowShouldClose(window))
 		{
-			currentTime = glfwGetTime();
+			currentTime = (float)glfwGetTime();
 			frameTime = currentTime - lastTime;
 			/* Render here */
 			GLCall(glClearColor(0.0f,0.0f,0.0f,1.0f));

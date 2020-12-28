@@ -9,7 +9,7 @@ test::Test2Body::Test2Body()
 	//m_scale = pow(10,8);
 	//m_Body1.SetMass(5.9722 * pow(10,24));
 	//m_Body2.SetMass(7.342 * pow(10,22));
-	m_Scale = 9.375e9;
+	m_Scale = 9.375e9f;
 	
 	cubeMesh.CreateCube();
 
@@ -31,7 +31,7 @@ test::Test2Body::Test2Body()
 
 
 
-	m_Texture = new Texture("res/textures/Oh.png");
+	m_Texture = new Texture("res/textures/","Oh.png");
 	m_Shader->SetUniform1i("u_Texture", 0);
 
 	row::UpdateBodyEuler(&m_Body2, &m_Body1, 0,m_Scale);
@@ -103,7 +103,7 @@ void test::Test2Body::OnRender()
 	// Accept fragment if it closer to the camera than the former one
 	glDepthFunc(GL_LESS);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	m_Shader->SetUniform4f("u_Colour", 0.9, 0.5, 0.2, 1.0);
+	m_Shader->SetUniform4f("u_Colour", 0.9f, 0.5f, 0.2f, 1.0f);
 
 	{
 		glm::mat4 model = m_Body1.GetTransform();
@@ -118,7 +118,7 @@ void test::Test2Body::OnRender()
 		glVertex3f(m_Body2.GetPosition()->x, m_Body2.GetPosition()->y, m_Body2.GetPosition()->z);
 		glEnd();*/
 	}
-	m_Shader->SetUniform4f("u_Colour", 0.3, 0.8, 0.9, 1.0);
+	m_Shader->SetUniform4f("u_Colour", 0.3f, 0.8f, 0.9f, 1.0f);
 	{
 		glm::mat4 model = m_Body2.GetTransform();
 		glm::mat4 mvp = proj * view * model;

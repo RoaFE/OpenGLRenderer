@@ -22,7 +22,7 @@ test::TestMeshes::TestMeshes()
 
 
 
-	m_Texture = new Texture("res/textures/Oh.png");
+	m_Texture = new Texture("res/textures","Oh.png");
 	m_Shader->SetUniform1i("u_Texture", 0);
 
 	cam.SetPos(0, 0, 30);
@@ -91,7 +91,7 @@ void test::TestMeshes::OnRender()
 	// Accept fragment if it closer to the camera than the former one
 	glDepthFunc(GL_LESS);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	m_Shader->SetUniform4f("u_Colour", 0.9, 0.5, 0.2, 1.0);
+	m_Shader->SetUniform4f("u_Colour", 0.9f, 0.5f, 0.2f, 1.0f);
 
 	{
 		glm::mat4 model = m_Mesh1.GetTransform();
@@ -106,7 +106,7 @@ void test::TestMeshes::OnRender()
 		glVertex3f(m_Body2.GetPosition()->x, m_Body2.GetPosition()->y, m_Body2.GetPosition()->z);
 		glEnd();*/
 	}
-	m_Shader->SetUniform4f("u_Colour", 0.3, 0.8, 0.9, 1.0);
+	m_Shader->SetUniform4f("u_Colour", 0.3f, 0.8f, 0.9f, 1.0f);
 	{
 		glm::mat4 model = m_Mesh2.GetTransform();
 		glm::mat4 mvp = proj * view * model;

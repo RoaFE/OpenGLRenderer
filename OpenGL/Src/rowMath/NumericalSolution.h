@@ -16,7 +16,7 @@ namespace row
 		//Calculate the direction of the force
 		row::vector3 dir = pos2 - pos1;
 		//Calculate the distance
-		float distance = dir.Magnitude();
+		float distance = (float)dir.Magnitude();
 		//r^3 for the calculation
 		distance = distance * distance * distance;
 		//Mass of the other body
@@ -56,7 +56,7 @@ namespace row
 		//Calculate the direction of the force
 		row::vector3 dir = externalPos - tempPos;
 		//Calculate the distance
-		float distance = dir.Magnitude();
+		float distance = (float)dir.Magnitude();
 		//r^3 for the calculation
 		distance = distance * distance * distance;
 		//Mass of the other body
@@ -69,7 +69,7 @@ namespace row
 		tempVel = rkPartialStep(tempVel, k1, timeStep,0.5);
 		tempPos = rkPartialStep(tempPos, tempVel, timeStep, 0.5);
 		dir = externalPos - tempPos;
-		distance = dir.Magnitude();
+		distance = (float)dir.Magnitude();
 		distance = distance * distance * distance;
 		temp = ((GRAVITATIONAL_CONSTANT * mass) / distance);
 		k2 = dir * temp;
@@ -77,7 +77,7 @@ namespace row
 		tempVel = rkPartialStep(tempVel, k2, timeStep, 0.5);
 		tempPos = rkPartialStep(tempPos, tempVel, timeStep, 0.5);
 		dir = externalPos - tempPos;
-		distance = dir.Magnitude();
+		distance = (float)dir.Magnitude();
 		distance = distance * distance * distance;
 
 		temp = ((GRAVITATIONAL_CONSTANT * mass) / distance);
@@ -86,7 +86,7 @@ namespace row
 		tempVel = rkPartialStep(tempVel, k3, timeStep, 1);
 		tempPos = rkPartialStep(tempPos, tempVel, timeStep, 1);
 		dir = externalPos - tempPos;
-		distance = dir.Magnitude();
+		distance = (float)dir.Magnitude();
 		distance = distance * distance * distance;
 
 		temp = ((GRAVITATIONAL_CONSTANT * mass) / distance);
