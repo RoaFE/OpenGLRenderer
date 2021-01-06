@@ -24,5 +24,6 @@ public:
 	void Clear() const;
 	void SetClearColour() const;
 	void Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader) const;
+	void DrawLine(Shader& shader, glm::vec3 start, glm::vec3 end, glm::vec4 colour = glm::vec4(1, 1, 1, 1), float width = 1);
 	//void DrawText(Shader& shader, Text& text);
 };

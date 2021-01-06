@@ -37,6 +37,8 @@ public:
 	void SetMass(float mass) { m_Mass = mass; }
 	std::string GetName() { return m_Name; }
 
+	void Draw(Shader &shader);
+
 private:
 	row::vector3 m_Position;
 	glm::vec4 m_Rotation;

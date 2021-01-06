@@ -35,4 +35,16 @@ void Renderer::Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& 
 
 }
 
+void Renderer::DrawLine(Shader& shader, glm::vec3 start, glm::vec3 end, glm::vec4 colour, float width)
+{
+	shader.SetUniform4f("u_Colour",colour.x, colour.y, colour.z, colour.w);
+	shader.Bind();
+	glBegin(GL_LINES);
+	glLineWidth((GLfloat)width);
+	glVertex3f(start.x, start.y, start.z);
+	glVertex3f(end.x, end.y, end.z);
+	glEnd();
+	glLineWidth(1.0f);
+}
+
 

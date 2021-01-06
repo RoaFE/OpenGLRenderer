@@ -136,6 +136,7 @@
     <ClCompile Include="Src\tests\TestClearColour.cpp" />
     <ClCompile Include="Src\tests\TestCube.cpp" />
     <ClCompile Include="Src\tests\TestDepthTest.cpp" />
+    <ClCompile Include="Src\tests\TestDrawing.cpp" />
     <ClCompile Include="Src\tests\TestFont.cpp" />
     <ClCompile Include="Src\tests\TestMeshes.cpp" />
     <ClCompile Include="Src\tests\TestModel.cpp" />
@@ -313,6 +314,7 @@
     <ClInclude Include="Src\tests\Test.h" />
     <ClInclude Include="Src\tests\TestCube.h" />
     <ClInclude Include="Src\tests\TestDepthTest.h" />
+    <ClInclude Include="Src\tests\TestDrawing.h" />
     <ClInclude Include="Src\tests\TestFont.h" />
     <ClInclude Include="Src\tests\TestMeshes.h" />
     <ClInclude Include="Src\tests\TestModel.h" />

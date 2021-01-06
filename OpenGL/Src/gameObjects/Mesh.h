@@ -36,6 +36,7 @@ public:
 	IndexBuffer* GetIB(){ return m_IB; };
 	void CreateCube();
 	void CreateQuad();
+	void CreatePlane(int width = 10, int height = 10);
 	void CreateSphere(float radius = 1.f, int longitude = 10, int latitutde = 10);
 
 	void Draw(Shader &shader);

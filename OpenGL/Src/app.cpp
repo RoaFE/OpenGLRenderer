@@ -32,6 +32,7 @@
 #include "tests/TestDepthTest.h"
 #include "tests/TestStencil.h"
 #include "tests/TestModel.h"
+#include "tests/TestDrawing.h"
 
 double yScroll;
 
@@ -57,7 +58,7 @@ int main(void)
 
 	bool renderUI = true;
 	bool pressed = false;
-
+	bool wireFrame = false;
 	GLFWmonitor* primary = glfwGetPrimaryMonitor();
 
 	const GLFWvidmode* mode = glfwGetVideoMode(primary);
@@ -68,7 +69,7 @@ int main(void)
 	glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
 
 	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(800, 600, "Renderer", NULL, NULL);
+	window = glfwCreateWindow(960, 540, "Renderer", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
@@ -144,6 +145,7 @@ int main(void)
 		testMenu->RegisterTest<test::TestDepthTest>("Test Depth Test");
 		//testMenu->RegisterTest<test::TestStencil>("Test Outline/Stencil");
 		testMenu->RegisterTest<test::TestModel>("Test Model");
+		testMenu->RegisterTest<test::TestDrawing>("Test Drawing");
 		//testMenu->RegisterTest<test::TestSolarSystem>("Test Solar System");
 		//testMenu->RegisterTest<test::TestMeshes>("Test Mesh");
 		/* Loop until the user closes the window */
@@ -194,6 +196,19 @@ int main(void)
 						if (currentTest)
 						{
 							currentTest->OnImGuiRenderMenuBar();
+						}
+						if (ImGui::BeginMenu("Settings"))
+						{
+							ImGui::Checkbox("WireFrame", &wireFrame);
+							if (wireFrame)
+							{
+								glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+							}
+							else
+							{
+								glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+							}
+							ImGui::EndMenu();
 						}
 						ImGui::SameLine(ImGui::GetWindowWidth() - 390.f);
 						ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);

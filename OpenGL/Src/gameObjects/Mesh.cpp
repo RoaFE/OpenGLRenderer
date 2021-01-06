@@ -2,6 +2,11 @@
 
 
 
+int coordToIndice(int x, int y, int width)
+{
+	return x + (y * width);
+}
+
 Mesh::Mesh()
 	:m_VAO(nullptr), m_VB(nullptr), m_IB(nullptr), m_Setup(false)
 {
@@ -168,6 +173,68 @@ void Mesh::CreateQuad()
 
 }
 
+void Mesh::CreatePlane(int width, int height)
+{
+	int heightVert = height + 1;
+	int widthVert = width + 1;
+	
+	for (int z = 0; z < heightVert; z++)
+	{
+		for (int x = 0; x < widthVert; x++)
+		{
+			Vertex vertex;
+			vertex.TexCoords = glm::vec2((float)x/(float)widthVert,(float)z/(float)heightVert);
+			vertex.Normal = glm::vec3(0,1,0);
+			vertex.Position = glm::vec3(x,0,z);
+			m_Vertices.push_back(vertex);
+		}
+	}
+
+	for (int z = 0; z < heightVert - 1; z++)
+	{
+		for (int x = 0; x < widthVert - 1; x++)
+		{
+			if ((x + z) % 2)
+			{
+				m_Indices.push_back(coordToIndice(x, z, widthVert));
+				m_Indices.push_back(coordToIndice(x, z + 1, widthVert));
+				m_Indices.push_back(coordToIndice(x + 1, z, widthVert));
+
+				m_Indices.push_back(coordToIndice(x + 1, z, widthVert));
+				m_Indices.push_back(coordToIndice(x, z + 1, widthVert));
+				m_Indices.push_back(coordToIndice(x + 1, z + 1, widthVert));
+			}
+			else
+			{
+				m_Indices.push_back(coordToIndice(x, z, widthVert));
+				m_Indices.push_back(coordToIndice(x, z + 1, widthVert));
+				m_Indices.push_back(coordToIndice(x + 1, z + 1, widthVert));
+
+				m_Indices.push_back(coordToIndice(x + 1, z, widthVert));
+				m_Indices.push_back(coordToIndice(x, z, widthVert));
+				m_Indices.push_back(coordToIndice(x + 1, z + 1, widthVert));
+			}
+
+
+		}
+	}
+
+	m_VAO = new VertexArray;
+	m_VB = new VertexBuffer(m_Vertices.data(), m_Vertices.size() * sizeof(Vertex));
+
+	VertexBufferLayout layout;
+	layout.Push<float>(3);
+	layout.Push<float>(3);
+	layout.Push<float>(2);
+
+	m_VAO->AddBuffer(*m_VB, layout);
+	//index buffer object (ibo)
+	m_IB = new IndexBuffer(m_Indices.data(), m_Indices.size());
+
+}
+
+
+
 void Mesh::CreateSphere(float r, int lon, int lat)
 {
 	std::vector<float> vertex;
@@ -290,9 +357,9 @@ void Mesh::Destroy()
 {
 	for (Texture* texture : m_Textures)
 	{
+		//texture memory should have been deleted in loaded textures in model
 		if (texture)
 		{
-			delete texture;
 			texture = nullptr;
 		}
 		m_Textures.clear();

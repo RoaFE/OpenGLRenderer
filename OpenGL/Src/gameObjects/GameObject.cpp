@@ -42,3 +42,8 @@ glm::mat4 GameObject::GetTransform()
 	return m_LocalTransform;
 }
 
+
+void GameObject::Draw(Shader & shader)
+{
+	m_Mesh->Draw(shader);
+}

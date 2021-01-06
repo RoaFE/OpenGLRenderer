@@ -43,8 +43,6 @@ test::TestStencil::TestStencil()
 	glEnable(GL_STENCIL_TEST);
 
 
-
-
 	m_Shader = new Shader("res/shaders/Basic.shader");
 	m_StencilShader = new Shader("res/shaders/OutlineStencil.shader");
 }
@@ -76,6 +74,7 @@ test::TestStencil::~TestStencil()
 			delete cubes[i];
 		}
 	}
+	glDisable(GL_STENCIL_TEST);
 
 }
 

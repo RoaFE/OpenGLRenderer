@@ -22,7 +22,13 @@ public:
 
 	void SetPos(float x, float y, float z) { m_Position = glm::vec3(x, y, z); }
 	void SetPos(glm::vec3 pos) { m_Position = pos; }
+	glm::vec3 GetPos() {return m_Position; }
 	glm::vec3 GetDirection() { return m_Direction; };
+
+	glm::vec3 ScreenToWorldSpace(glm::vec2 screenPos, GLFWwindow* window);
+	glm::vec3 ScreenToWorldSpaceNear(glm::vec2 screenPos, GLFWwindow* window);
+	glm::vec3 ScreenToWorldSpaceFar(glm::vec2 screenPos, GLFWwindow* window);
+
 
 protected:
 	// position

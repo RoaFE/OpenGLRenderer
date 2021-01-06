@@ -46,7 +46,9 @@ test::TestModel::~TestModel()
 
 	if (m_Model)
 	{
+		m_Model->Destroy();
 		delete m_Model;
+		m_Model = nullptr;
 	}
 
 }

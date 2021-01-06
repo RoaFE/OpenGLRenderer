@@ -67,6 +67,60 @@ void Camera::UpdatePosition(float dt, GLFWwindow* window)
 
 void Camera::UpdateMatrices(float dt)
 {
-	m_Proj = glm::perspective(glm::radians(m_FoV), 960.f / 540.f, 0.1f, 1000.f);
+	m_Proj = glm::perspective(glm::radians(m_FoV), 960.f / 540.f, 0.1f, 100.f);
 	m_View = glm::lookAt(m_Position, m_Position + m_Direction, m_Up);
+}
+
+glm::vec3 Camera::ScreenToWorldSpace(glm::vec2 screenPos, GLFWwindow* window)
+{
+	glm::mat4 invMat = glm::inverse(m_Proj * m_View);
+	int screenWidth, screenHeight;
+	glfwGetFramebufferSize(window, &screenWidth, &screenHeight);
+	float halfScreenWidth = (float)screenWidth / 2.f;
+	float halfScreenHeight = (float)screenHeight / 2.f;
+	glm::vec4 near = glm::vec4((screenPos.x - halfScreenWidth) / halfScreenWidth, (screenPos.y - halfScreenHeight) / -halfScreenHeight, -1, 1.0);
+	glm::vec4 far = glm::vec4((screenPos.x - halfScreenWidth) / halfScreenWidth, (screenPos.y - halfScreenHeight) / -halfScreenHeight, 1, 1.0);
+
+	glm::vec4 nearResult = invMat * near;
+	glm::vec4 farResult = invMat * far;
+
+	nearResult = nearResult / nearResult.w;
+	farResult = farResult / farResult.w;
+
+	glm::vec3 dir = glm::vec3(farResult - nearResult);
+
+	return dir;
+}
+
+glm::vec3 Camera::ScreenToWorldSpaceFar(glm::vec2 screenPos, GLFWwindow * window)
+{
+	glm::mat4 invMat = glm::inverse(m_Proj * m_View);
+	int screenWidth, screenHeight;
+	glfwGetFramebufferSize(window, &screenWidth, &screenHeight);
+	float halfScreenWidth = (float)screenWidth / 2.f;
+	float halfScreenHeight = (float)screenHeight / 2.f;
+	glm::vec4 far = glm::vec4((screenPos.x - halfScreenWidth) / halfScreenWidth, (screenPos.y - halfScreenHeight) / -halfScreenHeight, 1, 1.0);
+
+	glm::vec4 farResult = invMat * far;
+
+	farResult = farResult / farResult.w;
+
+
+	return farResult;
+}
+
+glm::vec3 Camera::ScreenToWorldSpaceNear(glm::vec2 screenPos, GLFWwindow * window)
+{
+	glm::mat4 invMat = glm::inverse(m_Proj * m_View);
+	int screenWidth, screenHeight;
+	glfwGetFramebufferSize(window, &screenWidth, &screenHeight);
+	float halfScreenWidth = (float)screenWidth / 2.f;
+	float halfScreenHeight = (float)screenHeight / 2.f;
+	glm::vec4 near = glm::vec4((screenPos.x - halfScreenWidth) / halfScreenWidth, (screenPos.y - halfScreenHeight) / -halfScreenHeight, 0, 1.0);
+
+	glm::vec4 nearResult = invMat * near;
+
+	nearResult = nearResult / nearResult.w;
+
+	return nearResult;
 }

@@ -12,6 +12,7 @@ private:
 
 public:
 	Texture(const std::string& directory,const std::string& name);
+	//Texture();
 	~Texture();
 
 
