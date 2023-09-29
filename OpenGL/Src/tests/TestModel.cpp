@@ -1,5 +1,6 @@
 #include "TestModel.h"
 #include<time.h>
+#include <filesystem>
 test::TestModel::TestModel()
 	: m_Shader(nullptr), m_Texture(nullptr), m_Translation(0, 0, 0), m_Scale(1, 1, 1),
 	m_Rotation(0, 1, 0, 0), m_FoV(45)
@@ -9,8 +10,7 @@ test::TestModel::TestModel()
 	srand((unsigned int)time(0));
 
 
-
-	m_Model = new Model("res/models/backpack/backpack.obj");
+	m_Model = new Model("/res/models/backpack/backpack.obj");
 	
 	m_Texture = new Texture("res/models/backpack", "diffuse.jpg");
 
@@ -20,7 +20,7 @@ test::TestModel::TestModel()
 	m_Shader = new Shader("res/shaders/BasicModel.shader");
 
 	m_Shader->Bind();
-	//m_Shader->SetUniform1f("texture_diffuse1", 0);
+	m_Shader->SetUniform1f("texture_diffuse1", 0);
 
 }
 

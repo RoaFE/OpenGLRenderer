@@ -16,7 +16,7 @@ struct VertexBufferElement
 {
 	unsigned int type;
 	unsigned int count;
-	unsigned int normalised;
+	unsigned char normalised;
 	
 	static unsigned int GetSizeOfType(unsigned int type)
 	{
@@ -43,13 +43,14 @@ public:
 	template<typename T>
 	void Push(unsigned int count)
 		{
-			static_assert(false);
+			assert(false);
 		}
 	template<>
 	void Push<float>(unsigned int count)
 	{
 		m_Elements.push_back({GL_FLOAT, count, GL_FALSE });
 		m_Stride += VertexBufferElement::GetSizeOfType(GL_FLOAT) * count;
+		
 	}
 
 	template<>

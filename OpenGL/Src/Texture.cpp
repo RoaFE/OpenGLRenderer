@@ -6,6 +6,10 @@ Texture::Texture(const std::string& directory, const std::string& name)
 
 	stbi_set_flip_vertically_on_load(1);
 	m_LocalBuffer = stbi_load((directory + "/" + name).c_str(), &m_Width, &m_Height, &m_BPP, 4);
+	if (m_LocalBuffer == NULL)
+	{
+		m_LocalBuffer = stbi_load((directory.substr(1,directory.length() - 1) + "/" + name).c_str(), &m_Width, &m_Height, &m_BPP, 4);
+	}
 	GLCall(glGenTextures(1, &m_RendererID));
 	GLCall(glBindTexture(GL_TEXTURE_2D,m_RendererID));
 	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));

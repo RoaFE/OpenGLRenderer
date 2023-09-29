@@ -1,4 +1,10 @@
 #include "Model.h"
+#include "Log.h"
+
+#include <stdio.h>  /* defines FILENAME_MAX */
+#include <direct.h>
+#define GetCurrentDir _getcwd
+
 
 void Model::Draw(Shader & shader)
 {
@@ -27,12 +33,24 @@ void Model::Destroy()
 
 void Model::loadModel(std::string path)
 {
+	char cCurrentPath[FILENAME_MAX];
+
+	if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath)))
+	{
+		return Log::Error("ASSIMP::Error");;
+	}
+
+	cCurrentPath[sizeof(cCurrentPath) - 1] = '\0'; /* not really required */
+
+	printf("The current working directory is %s\n", cCurrentPath);
 	Assimp::Importer import;
-	const aiScene *scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
+	const aiScene *scene = import.ReadFile(cCurrentPath + path, aiProcess_Triangulate | aiProcess_FlipUVs);
+	
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
-		std::cout << "ERROR::ASSIMP::" << import.GetErrorString() <<std::endl;
+		std::string error = import.GetErrorString();
+		Log::Error("ASSIMP::" + error);
 		return;
 	}
 	directory = path.substr(0, path.find_last_of('/'));

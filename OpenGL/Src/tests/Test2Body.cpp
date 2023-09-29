@@ -31,7 +31,7 @@ test::Test2Body::Test2Body()
 
 
 
-	m_Texture = new Texture("res/textures/","Oh.png");
+	m_Texture = new Texture("res/textures","Oh.png");
 	m_Shader->SetUniform1i("u_Texture", 0);
 
 	row::UpdateBodyEuler(&m_Body2, &m_Body1, 0,m_Scale);

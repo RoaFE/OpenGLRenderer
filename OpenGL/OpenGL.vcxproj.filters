@@ -114,6 +114,9 @@
     <ClCompile Include="Src\tests\TestDrawing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Log.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
@@ -523,6 +526,7 @@
     <None Include="res\shaders\Depth.Shader" />
     <None Include="res\shaders\OutlineStencil.Shader" />
     <None Include="res\shaders\BasicModel.Shader" />
+    <None Include="res\shaders\BasicModel2.Shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Renderer.h">
@@ -1363,6 +1367,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\tests\TestDrawing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
