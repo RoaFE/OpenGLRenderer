@@ -3,7 +3,7 @@
 #include <filesystem>
 test::TestModel::TestModel()
 	: m_Shader(nullptr), m_Texture(nullptr), m_Translation(0, 0, 0), m_Scale(1, 1, 1),
-	m_Rotation(0, 1, 0, 0), m_FoV(45), m_lightColour(1,0,1,1)
+	m_Rotation(0, 1, 0, 0), m_FoV(45)
 {
 
 	
@@ -102,10 +102,11 @@ void test::TestModel::OnRender()
 			m_Shader->Bind();
 
 			m_Shader->SetUniformMat4f("u_MVP", mvp);
+			m_Shader->SetUniformMat4f("u_Model", model);
 			//m_Shader->SetUniform1f("u_Time", glfwGetTime());
-			m_Shader->SetUniform4f("u_LightColour", m_lightColour.r, m_lightColour.g, m_lightColour.b, m_lightColour.a);
-			//m_Shader->SetUniform4f("u_Colour", 0.9f, 0.5f, 0.2f, 1.0f);
-
+			m_Shader->SetUniform3f("u_LightColour", m_lightColour.r, m_lightColour.g, m_lightColour.b);
+			m_Shader->SetUniform4f("u_AmbientColour", m_ambientColour.r,m_ambientColour.g,m_ambientColour.b,m_ambientStrength);
+			m_Shader->SetUniform3f("u_LightPos", m_lightPos.x, m_lightPos.y, m_lightPos.z);
 			m_Model->Draw(*m_Shader);
 		}
 
@@ -119,7 +120,9 @@ void test::TestModel::OnImGuiRender()
 		ImGui::DragFloat("FoV", &m_FoV,0.5, 30, 180);
 		// Edit 1 float using a slider from 0.0f to 1.0f
 		//ImGui::DragFloat3("CameraPos", &translation.x, 0.1f, -20.f, 960.0f);
-		ImGui::ColorEdit4("Colour1", &m_lightColour.x);
+		ImGui::ColorEdit3("LightColour", &m_lightColour.x);
+		ImGui::ColorEdit3("AmbientColour", &m_ambientColour.x);
+		ImGui::DragFloat("AmbientStrength", &m_ambientStrength, 0.05f, 0, 1);
 
 	}
 }
