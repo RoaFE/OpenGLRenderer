@@ -17,43 +17,43 @@ public:
 
 	void BuildTransform();
 	glm::mat4 GetTransform();
-	void SetMesh(Mesh* mesh) { m_Mesh = mesh; }
-	Mesh* GetMesh() { return m_Mesh; };
-	void SetPosition(row::vector3 pos) { m_Position = pos; }
-	void AddPosition(row::vector3 pos) { m_Position += pos; }
-	void SetVelocity(row::vector3 vel) { m_Velocity = vel; }
-	void SetAcceleration(row::vector3 acc) { m_Acceleration = acc; }
-	void SetPrevAcceleration(row::vector3 acc) { m_PrevAcceleration = acc; }
-	void SetScale(glm::vec3 scale) { m_Scale = scale; }
-	void SetRotation(glm::vec4 rot) { m_Rotation = rot; }
-	row::vector3 GetPosition() { return m_Position; }
-	row::vector3 GetVelocity() { return m_Velocity; }
-	row::vector3 GetAcceleration() { return m_Acceleration; }
-	row::vector3 GetPrevAcceleration() { return m_PrevAcceleration; }
-	glm::vec3* GetScale() { return &m_Scale; }
-	glm::vec4* GetRotation() { return &m_Rotation; }
-	glm::vec4 GetColour() { return m_Colour; }
-	float GetMass() { return m_Mass; }
-	void SetMass(float mass) { m_Mass = mass; }
-	std::string GetName() { return m_Name; }
+	void SetMesh(Mesh* mesh) { m_mesh = mesh; }
+	Mesh* GetMesh() { return m_mesh; };
+	void SetPosition(row::vector3 pos) { m_position = pos; }
+	void AddPosition(row::vector3 pos) { m_position += pos; }
+	void SetVelocity(row::vector3 vel) { m_velocity = vel; }
+	void SetAcceleration(row::vector3 acc) { m_acceleration = acc; }
+	void SetPrevAcceleration(row::vector3 acc) { m_prevAcceleration = acc; }
+	void SetScale(glm::vec3 scale) { m_scale = scale; }
+	void SetRotation(glm::vec4 rot) { m_rotation = rot; }
+	row::vector3 GetPosition() { return m_position; }
+	row::vector3 GetVelocity() { return m_velocity; }
+	row::vector3 GetAcceleration() { return m_acceleration; }
+	row::vector3 GetPrevAcceleration() { return m_prevAcceleration; }
+	glm::vec3* GetScale() { return &m_scale; }
+	glm::vec4* GetRotation() { return &m_rotation; }
+	glm::vec4 GetColour() { return m_colour; }
+	float GetMass() { return m_mass; }
+	void SetMass(float mass) { m_mass = mass; }
+	std::string GetName() { return m_name; }
 
 	void Draw(Shader &shader);
 
 private:
-	row::vector3 m_Position;
-	glm::vec4 m_Rotation;
-	glm::vec3 m_Scale;
-	glm::mat4 m_LocalTransform;
+	row::vector3 m_position;
+	glm::vec4 m_rotation;
+	glm::vec3 m_scale;
+	glm::mat4 m_localTransform;
 
-	row::vector3 m_Acceleration;
-	row::vector3 m_Velocity;
-	row::vector3 m_PrevAcceleration;
-	float m_Mass;
+	row::vector3 m_acceleration;
+	row::vector3 m_velocity;
+	row::vector3 m_prevAcceleration;
+	float m_mass;
 
-	Mesh* m_Mesh;
-	glm::vec4 m_Colour;
+	Mesh* m_mesh;
+	glm::vec4 m_colour;
 
-	std::string m_Name;
+	std::string m_name;
 
 };
 

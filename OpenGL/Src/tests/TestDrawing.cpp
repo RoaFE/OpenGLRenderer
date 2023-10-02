@@ -4,7 +4,7 @@ test::TestDrawing::TestDrawing()
 	: m_Shader(nullptr), m_Texture(nullptr), m_Translation(0, 0, 0), m_Scale(1, 1, 1),
 	m_Rotation(0, 1, 0, 0), m_FoV(45),m_CameraControl(true)
 {
-	cubeMesh.CreatePlane(2,4);
+	cubeMesh.CreatePlane(3,5);
 	cube.SetMesh(&cubeMesh);
 
 	GLCall(glEnable(GL_BLEND));

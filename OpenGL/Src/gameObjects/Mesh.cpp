@@ -178,6 +178,10 @@ void Mesh::CreatePlane(int width, int height)
 	int heightVert = height + 1;
 	int widthVert = width + 1;
 	
+	//float halfHeightVert = heightVert / 2.f;
+	//float halfWidthVert = widthVert / 2.f;
+
+
 	for (int z = 0; z < heightVert; z++)
 	{
 		for (int x = 0; x < widthVert; x++)

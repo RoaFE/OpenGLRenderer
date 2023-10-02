@@ -42,6 +42,8 @@ namespace test {
 		glm::mat4 proj;
 		glm::mat4 view;
 
+		glm::vec4 m_lightColour;
+
 		float m_FoV;
 
 		Shader* m_Shader;
@@ -49,6 +51,8 @@ namespace test {
 		Texture* m_Texture;
 
 		Model* m_Model;
+
+		GameObject m_plane;
 
 		Mesh cubeMesh;
 		Mesh quad;

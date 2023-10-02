@@ -12,11 +12,13 @@ out
 vec2 TexCoords;
 
 uniform mat4 u_MVP;
+uniform float u_Time;
+
 
 void main()
 {
     gl_Position = u_MVP * vec4(position, 1.0);
-    float yOffset = 0;
+    gl_Position.y = gl_Position.y + sin(u_Time + position.y);
     TexCoords = aTexCoords;
 }
 
