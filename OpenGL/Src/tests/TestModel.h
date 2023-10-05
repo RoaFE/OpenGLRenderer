@@ -45,17 +45,18 @@ namespace test {
 		glm::vec3 m_lightColour = glm::vec3(0, 1, 0.6);
 		glm::vec3 m_ambientColour = glm::vec3(0,0.1,0.1);
 		float m_ambientStrength = 0.6;
-		glm::vec3 m_lightPos = glm::vec3(3, 3, 2);
+		glm::vec3 m_lightPos = glm::vec3(8, 8, 2);
 
 		float m_FoV;
 
 		Shader* m_Shader;
 		Shader* m_StencilShader;
+		Shader* m_UnlitShader;
 		Texture* m_Texture;
 
 		Model* m_Model;
 
-		GameObject m_plane;
+		GameObject m_testCube;
 
 		Mesh cubeMesh;
 		Mesh quad;

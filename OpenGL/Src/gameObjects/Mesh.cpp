@@ -82,7 +82,7 @@ void Mesh::CreateCube()
 	// 5	Back bottom right
 	vertex.Position = glm::vec3(1.f, -1.f, -1.0f);
 	vertex.Normal = glm::vec3(1.f, -1.f, -1.0f);
-	vertex.TexCoords = glm::vec2(1.f, 1.f);
+	vertex.TexCoords = glm::vec2(0.f, 0.f);
 	m_Vertices.push_back(vertex);
 	// 6	Back top right
 	vertex.Position = glm::vec3(1.f, 1.f, -1.0f);
@@ -92,7 +92,7 @@ void Mesh::CreateCube()
 	// 7	Back top left
 	vertex.Position = glm::vec3(-1.f, 1.f, -1.0f);
 	vertex.Normal = glm::vec3(-1.f, 1.f, -1.0f);
-	vertex.TexCoords = glm::vec2(0.f, 0.f);
+	vertex.TexCoords = glm::vec2(1.f, 1.f);
 	m_Vertices.push_back(vertex);
 
 

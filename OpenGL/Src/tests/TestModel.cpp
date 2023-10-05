@@ -1,6 +1,7 @@
 #include "TestModel.h"
 #include<time.h>
 #include <filesystem>
+#include<vector>
 test::TestModel::TestModel()
 	: m_Shader(nullptr), m_Texture(nullptr), m_Translation(0, 0, 0), m_Scale(1, 1, 1),
 	m_Rotation(0, 1, 0, 0), m_FoV(45)
@@ -19,10 +20,17 @@ test::TestModel::TestModel()
 	tempPlane.CreatePlane();
 	m_plane.SetMesh(&tempPlane);*/
 
-	m_Shader = new Shader("res/shaders/BasicModel.shader");
+	cubeMesh.CreateCube();
+	m_testCube = GameObject(row::vector3(0, 0, 0), glm::vec3(1, 1, 1), 10, row::vector3(0, 0, 0), glm::vec4(1, 1, 1, 1), "Cube");
+	m_testCube.SetMesh(&cubeMesh);
 
+
+	m_Shader = new Shader("res/shaders/BasicModel.shader");
+	m_UnlitShader = new Shader("res/shaders/Basic.shader");
+	m_UnlitShader->Bind();
 	m_Shader->Bind();
-	//m_Shader->SetUniform1f("texture_diffuse1", 0);
+	m_Texture->Bind(0);
+	m_Shader->SetUniform1f("texture_diffuse1", 0);
 
 }
 
@@ -81,7 +89,8 @@ void test::TestModel::OnUpdate(float dt)
 
 void test::TestModel::OnRender()
 {
-	
+	Renderer renderer;
+
 	GLCall(glClearColor(m_ClearColour[0], m_ClearColour[1], m_ClearColour[2], m_ClearColour[3]));
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -107,10 +116,41 @@ void test::TestModel::OnRender()
 			m_Shader->SetUniform3f("u_LightColour", m_lightColour.r, m_lightColour.g, m_lightColour.b);
 			m_Shader->SetUniform4f("u_AmbientColour", m_ambientColour.r,m_ambientColour.g,m_ambientColour.b,m_ambientStrength);
 			m_Shader->SetUniform3f("u_LightPos", m_lightPos.x, m_lightPos.y, m_lightPos.z);
+			m_Shader->SetUniform3f("u_viewPos", cam.GetPos().x, cam.GetPos().y, cam.GetPos().z);
 			m_Model->Draw(*m_Shader);
+
+			m_UnlitShader->Bind();
+			m_testCube.SetPosition(row::GlmToRow(m_lightPos));
+			m_testCube.BuildTransform();
+			mvp = proj * view * m_testCube.GetTransform();
+			m_UnlitShader->SetUniformMat4f("u_MVP", mvp);
+			m_UnlitShader->SetUniform4f("u_Colour", m_lightColour.r, m_lightColour.g, m_lightColour.b, 1);
+			m_testCube.Draw(*m_UnlitShader);
 		}
 
 	}
+	
+		/*std::vector<Mesh>::const_iterator meshIter;
+		std::vector<Mesh>::const_iterator meshIterEnd;
+		std::vector<Mesh> meshes = m_Model->GetMeshes();
+		meshIter = meshes.begin();
+		meshIterEnd = meshes.end();
+		std::vector<Vertex>::iterator vertexIter;
+		for (; meshIter != meshIterEnd; meshIter++)
+		{
+			Mesh curMesh = *meshIter;
+			for (vertexIter = curMesh.m_Vertices.begin(); vertexIter != curMesh.m_Vertices.end(); vertexIter++)
+			{
+				m_UnlitShader->Bind();
+				glm::mat4 model = glm::translate(glm::mat4(1), glm::vec3(0,0,0));
+				glm::mat4 mvp = proj * view * model;
+				m_UnlitShader->SetUniformMat4f("u_MVP", mvp);
+				m_UnlitShader->SetUniform4f("u_Colour", 1, 1, 0, 1);
+				renderer.DrawLine(*m_UnlitShader, vertexIter->Position, vertexIter->Position + vertexIter->Normal,glm::vec4(1,1,0,1));
+				m_UnlitShader->UnBind();
+			}
+		}*/
+	
 }
 
 void test::TestModel::OnImGuiRender()
@@ -123,6 +163,8 @@ void test::TestModel::OnImGuiRender()
 		ImGui::ColorEdit3("LightColour", &m_lightColour.x);
 		ImGui::ColorEdit3("AmbientColour", &m_ambientColour.x);
 		ImGui::DragFloat("AmbientStrength", &m_ambientStrength, 0.05f, 0, 1);
+
+		ImGui::DragFloat3("LightPos", &m_lightPos.x, 0.1f);
 
 	}
 }

@@ -20,6 +20,10 @@ public:
 	void Draw(Shader &shader);
 
 	void Destroy();
+	
+	std::vector<Mesh> GetMeshes() {
+		return meshes;
+	}
 
 private:
 	// model data
