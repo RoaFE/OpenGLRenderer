@@ -31,7 +31,6 @@ test::TestModel::TestModel()
 	m_Shader->Bind();
 	m_Texture->Bind(0);
 	m_Shader->SetUniform1f("texture_diffuse1", 0);
-
 }
 
 test::TestModel::~TestModel()
@@ -108,24 +107,34 @@ void test::TestModel::OnRender()
 
 			glm::mat4 mvp = proj * view * model;
 
+			m_light.Render(view, proj);
 			m_Shader->Bind();
 
-			m_Shader->SetUniformMat4f("u_MVP", mvp);
 			m_Shader->SetUniformMat4f("u_Model", model);
+			m_Shader->SetUniformMat4f("u_View", view);
+			m_Shader->SetUniformMat4f("u_Projection", proj);
 			//m_Shader->SetUniform1f("u_Time", glfwGetTime());
-			m_Shader->SetUniform3f("u_LightColour", m_lightColour.r, m_lightColour.g, m_lightColour.b);
-			m_Shader->SetUniform4f("u_AmbientColour", m_ambientColour.r,m_ambientColour.g,m_ambientColour.b,m_ambientStrength);
-			m_Shader->SetUniform3f("u_LightPos", m_lightPos.x, m_lightPos.y, m_lightPos.z);
-			m_Shader->SetUniform3f("u_viewPos", cam.GetPos().x, cam.GetPos().y, cam.GetPos().z);
-			m_Model->Draw(*m_Shader);
+			m_Shader->SetUniform3f("material.ambient", m_ambientColour.r, m_ambientColour.g, m_ambientColour.b);
+			m_Shader->SetUniform3f("material.diffuse", 1.0f, 0.5f, 0.31f);
+			m_Shader->SetUniform3f("material.specular", 0.5f, 0.5f, 0.5f);
+			m_Shader->SetUniform1f("material.shininess", 32.0f);
 
-			m_UnlitShader->Bind();
-			m_testCube.SetPosition(row::GlmToRow(m_lightPos));
-			m_testCube.BuildTransform();
-			mvp = proj * view * m_testCube.GetTransform();
-			m_UnlitShader->SetUniformMat4f("u_MVP", mvp);
-			m_UnlitShader->SetUniform4f("u_Colour", m_lightColour.r, m_lightColour.g, m_lightColour.b, 1);
-			m_testCube.Draw(*m_UnlitShader);
+			m_light.SetShaderUniform(m_Shader);
+
+			//m_Shader->SetUniform3f("light.ambient", m_lightColour.r / 3, m_lightColour.g / 3, m_lightColour.b / 3);
+			//m_Shader->SetUniform3f("light.diffuse", m_lightColour.r, m_lightColour.g, m_lightColour.b);
+			//m_Shader->SetUniform3f("light.specular", 1.0f, 1.0f, 1.0f);
+			//m_Shader->SetUniform3f("light.position", m_lightPos.x, m_lightPos.y, m_lightPos.z);
+			m_Model->Draw(*m_Shader);
+			m_Shader->UnBind();
+
+			//m_UnlitShader->Bind();
+			//m_testCube.SetPosition(row::GlmToRow(m_lightPos));
+			//m_testCube.BuildTransform();
+			//mvp = proj * view * m_testCube.GetTransform();
+			//m_UnlitShader->SetUniformMat4f("u_MVP", mvp);
+			//m_UnlitShader->SetUniform4f("u_Colour", m_lightColour.r, m_lightColour.g, m_lightColour.b, 1);
+			//m_testCube.Draw(*m_UnlitShader);
 		}
 
 	}
@@ -160,11 +169,9 @@ void test::TestModel::OnImGuiRender()
 		ImGui::DragFloat("FoV", &m_FoV,0.5, 30, 180);
 		// Edit 1 float using a slider from 0.0f to 1.0f
 		//ImGui::DragFloat3("CameraPos", &translation.x, 0.1f, -20.f, 960.0f);
-		ImGui::ColorEdit3("LightColour", &m_lightColour.x);
 		ImGui::ColorEdit3("AmbientColour", &m_ambientColour.x);
 		ImGui::DragFloat("AmbientStrength", &m_ambientStrength, 0.05f, 0, 1);
 
-		ImGui::DragFloat3("LightPos", &m_lightPos.x, 0.1f);
-
+		m_light.RenderImGUISettings();
 	}
 }

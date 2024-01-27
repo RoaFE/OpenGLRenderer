@@ -241,66 +241,60 @@ void Mesh::CreatePlane(int width, int height)
 
 void Mesh::CreateSphere(float r, int lon, int lat)
 {
-	std::vector<float> vertex;
-	std::vector<int> indices;
 	//calculating increment of angle in long and latitude
 	float theta = (2 * 3.14159) / lat;
 	float delta = 3.14159 / lon;
 	int index = 0;
+	Vertex vertex;
 	for (float i = 0; i < lon; i++)
 	{
 		for (float o = 0; o < lat; o++)
 		{
 
-
-			////Tex cordinates are calcualted since the circle is 
-			////like a rectangle curved into a sphere
-			//texCoords.push_back(theta*o / (2 * 3.14151));
-			//texCoords.push_back(delta*i / 3.14151);
-			////normals are the exact same as the vector from the centre to that vertice
-			//normals.push_back(cos(theta*o) * sin(delta*i));
-			//normals.push_back(cos(delta * i));
-			//normals.push_back(sin(theta*o) * sin(delta*i));
+			//Tex cordinates are calcualted since the circle is 
+			//like a rectangle curved into a sphere
+			vertex.TexCoords = glm::vec2((theta * o / (2 * 3.14151)), delta * i / 3.14151);
+			//normals are the exact same as the vector from the centre to that vertice
+			vertex.Normal = glm::vec3(cos(theta * o) * sin(delta * i), cos(delta * i), sin(theta * o) * sin(delta * i));
 			//vertex cordinates 
-			vertex.push_back(r*cos(theta*o) * sin(delta*i));
-			vertex.push_back(r*cos(delta * i));
-			vertex.push_back(r*sin(theta*o) * sin(delta*i));
+			vertex.Position = glm::vec3(r * cos(theta * o) * sin(delta * i), r * cos(delta * i), r * sin(theta * o) * sin(delta * i));
 
-			//texCoords.push_back(theta*o / (2 * 3.14151));
-			//texCoords.push_back(delta*((i + 1)) / 3.14151);
-			//normals.push_back(cos(theta*o) * sin(delta*((i + 1))));
-			//normals.push_back(cos(delta * ((i + 1))));
-			//normals.push_back(sin(theta*o) * sin(delta*((i + 1))));
-			vertex.push_back(r*cos(theta*o) * sin(delta*((i + 1))));
-			vertex.push_back(r*cos(delta * ((i + 1))));
-			vertex.push_back(r*sin(theta*o) * sin(delta*((i + 1))));
+			m_Vertices.push_back(vertex);
 
+			//like a rectangle curved into a sphere
+			vertex.TexCoords = glm::vec2((theta * o / (2 * 3.14151)), delta * ((i + 1)) / 3.14151);
+			//normals are the exact same as the vector from the centre to that vertice
+			vertex.Normal = glm::vec3(cos(theta * o) * sin(delta * ((i + 1))), cos(delta * ((i + 1))), sin(theta * o) * sin(delta * ((i + 1))));
+			//vertex cordinates 
+			vertex.Position = glm::vec3(r * cos(theta * o) * sin(delta * ((i + 1))), r * cos(delta * ((i + 1))), r * sin(theta * o) * sin(delta * ((i + 1))));
 
-			//texCoords.push_back(theta*((o + 1)) / (2 * 3.14151));
-			//texCoords.push_back(delta*(i + 1) / 3.14151);
-			//normals.push_back(cos(theta*((o + 1))) * sin(delta*(i + 1)));
-			//normals.push_back(cos(delta * (i + 1)));
-			//normals.push_back(sin(theta*((o + 1))) * sin(delta*(i + 1)));
-			vertex.push_back(r*cos(theta*((o + 1))) * sin(delta*(i + 1)));
-			vertex.push_back(r*cos(delta * (i + 1)));
-			vertex.push_back(r*sin(theta*((o + 1))) * sin(delta*(i + 1)));
+			m_Vertices.push_back(vertex);
 
+			//like a rectangle curved into a sphere
+			vertex.TexCoords = glm::vec2(theta * ((o + 1)) / (2 * 3.14151), delta * (i + 1) / 3.14151);
+			//normals are the exact same as the vector from the centre to that vertice
+			vertex.Normal = glm::vec3(cos(theta * ((o + 1))) * sin(delta * (i + 1)), cos(delta * (i + 1)), sin(theta * ((o + 1))) * sin(delta * (i + 1)));
+			//vertex cordinates 
+			vertex.Position = glm::vec3(r * cos(theta * ((o + 1))) * sin(delta * (i + 1)), r * cos(delta * (i + 1)), r * sin(theta * ((o + 1))) * sin(delta * (i + 1)));
 
-			//texCoords.push_back(theta*(o + 1) / (2 * 3.14151));
-			//texCoords.push_back(delta*i / 3.14151);
-			//normals.push_back(cos(theta*(o + 1)) * sin(delta*i));
-			//normals.push_back(cos(delta * i));
-			//normals.push_back(sin(theta*(o + 1)) * sin(delta*i));
-			vertex.push_back(r*cos(theta*(o + 1)) * sin(delta*i));
-			vertex.push_back(r*cos(delta * i));
-			vertex.push_back(r*sin(theta*(o + 1)) * sin(delta*i));
-			indices.push_back(index + 2);
-			indices.push_back(index + 1);
-			indices.push_back(index);
+			m_Vertices.push_back(vertex);
 
-			indices.push_back(index + 2);
-			indices.push_back(index);
-			indices.push_back(index + 3);
+			//like a rectangle curved into a sphere
+			vertex.TexCoords = glm::vec2(theta * (o + 1) / (2 * 3.14151), delta * i / 3.14151);
+			//normals are the exact same as the vector from the centre to that vertice
+			vertex.Normal = glm::vec3(cos(theta * (o + 1)) * sin(delta * i), cos(delta * i), sin(theta * (o + 1)) * sin(delta * i));
+			//vertex cordinates 
+			vertex.Position = glm::vec3(r * cos(theta * (o + 1)) * sin(delta * i), r * cos(delta * i), r * sin(theta * (o + 1)) * sin(delta * i));
+
+			m_Vertices.push_back(vertex);
+
+			m_Indices.push_back(index + 2);
+			m_Indices.push_back(index + 1);
+			m_Indices.push_back(index);
+
+			m_Indices.push_back(index + 2);
+			m_Indices.push_back(index);
+			m_Indices.push_back(index + 3);
 			index += 4;
 
 
@@ -308,14 +302,16 @@ void Mesh::CreateSphere(float r, int lon, int lat)
 	}
 
 	m_VAO = new VertexArray;
-	m_VB = new VertexBuffer(vertex.data(), vertex.size() * sizeof(float));
+	m_VB = new VertexBuffer(m_Vertices.data(), m_Vertices.size() * sizeof(Vertex));
 
 	VertexBufferLayout layout;
 	layout.Push<float>(3);
+	layout.Push<float>(3);
+	layout.Push<float>(2);
 
 	m_VAO->AddBuffer(*m_VB, layout);
 	//index buffer object (ibo)
-	m_IB = new IndexBuffer(indices.data(), indices.size());
+	m_IB = new IndexBuffer(m_Indices.data(), m_Indices.size());
 }
 
 void Mesh::Draw(Shader & shader)

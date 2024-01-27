@@ -125,6 +125,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Lighting\Light.cpp" />
     <ClCompile Include="Src\Log.cpp" />
     <ClCompile Include="Src\Camera.cpp" />
     <ClCompile Include="Src\Font.cpp" />
@@ -303,6 +304,7 @@
     <None Include="Src\vendor\glm\gtx\wrap.inl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Lighting\Light.h" />
     <ClInclude Include="Src\Log.h" />
     <ClInclude Include="Src\Camera.h" />
     <ClInclude Include="Src\Font.h" />

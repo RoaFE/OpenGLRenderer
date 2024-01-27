@@ -17,6 +17,7 @@
 #include "Camera.h"
 #include "RowUtil.h"
 #include "gameObjects/Model.h"
+#include "Lighting/Light.h"
 #include <vector>
 
 
@@ -42,10 +43,8 @@ namespace test {
 		glm::mat4 proj;
 		glm::mat4 view;
 
-		glm::vec3 m_lightColour = glm::vec3(0, 1, 0.6);
 		glm::vec3 m_ambientColour = glm::vec3(0,0.1,0.1);
 		float m_ambientStrength = 0.6;
-		glm::vec3 m_lightPos = glm::vec3(8, 8, 2);
 
 		float m_FoV;
 
@@ -60,6 +59,8 @@ namespace test {
 
 		Mesh cubeMesh;
 		Mesh quad;
+
+		Light m_light;
 
 		Camera cam;
 	};
