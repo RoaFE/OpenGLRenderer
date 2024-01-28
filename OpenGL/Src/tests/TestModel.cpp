@@ -31,6 +31,11 @@ test::TestModel::TestModel()
 	m_Shader->Bind();
 	m_Texture->Bind(0);
 	m_Shader->SetUniform1f("material.diffuse1", 0);
+
+	m_pointLight[0].SetPosition(glm::vec3(0, -2, 5));
+	m_pointLight[1].SetPosition(glm::vec3(5, 0, 0));
+	m_pointLight[2].SetPosition(glm::vec3(-5, 0, 5));
+	m_pointLight[3].SetPosition(glm::vec3(2, 4, -3));
 }
 
 test::TestModel::~TestModel()
@@ -107,20 +112,28 @@ void test::TestModel::OnRender()
 
 			glm::mat4 mvp = proj * view * model;
 
-			m_light.Render(view, proj);
+			m_dirLight.Render(view, proj);
+			for (int i = 0; i < 4; i++)
+			{
+				m_pointLight[i].Render(view, proj);
+			}
 			m_Shader->Bind();
 
 			m_Shader->SetUniformMat4f("u_Model", model);
 			m_Shader->SetUniformMat4f("u_View", view);
 			m_Shader->SetUniformMat4f("u_Projection", proj);
+			m_Shader->SetUniform3f("viewPos", cam.GetPos().x, cam.GetPos().y, cam.GetPos().z);
 			//m_Shader->SetUniform1f("u_Time", glfwGetTime());
 			//m_Shader->SetUniform3f("material.ambient", m_ambientColour.r, m_ambientColour.g, m_ambientColour.b);
 			m_Shader->SetUniform3f("material.diffuse1", 1.0f, 0.5f, 0.31f);
 			m_Shader->SetUniform3f("material.specular1", 0.5f, 0.5f, 0.5f);
-			m_Shader->SetUniform1f("material.shininess", 32.0f);
+			m_Shader->SetUniform1f("material.shininess1", 32.0f);
 
-			m_light.SetShaderUniform(m_Shader);
-
+			m_dirLight.SetShaderUniform(m_Shader);
+			for (int i = 0; i < 4; i++)
+			{
+				m_pointLight[i].SetShaderUniform(m_Shader, i, "pointLights");
+			}
 			//m_Shader->SetUniform3f("light.ambient", m_lightColour.r / 3, m_lightColour.g / 3, m_lightColour.b / 3);
 			//m_Shader->SetUniform3f("light.diffuse", m_lightColour.r, m_lightColour.g, m_lightColour.b);
 			//m_Shader->SetUniform3f("light.specular", 1.0f, 1.0f, 1.0f);
@@ -169,7 +182,18 @@ void test::TestModel::OnImGuiRender()
 		ImGui::DragFloat("FoV", &m_FoV,0.5, 30, 180);
 		// Edit 1 float using a slider from 0.0f to 1.0f
 		//ImGui::DragFloat3("CameraPos", &translation.x, 0.1f, -20.f, 960.0f);
+		if(ImGui::CollapsingHeader("DirectionalLight"))
+		{
+			m_dirLight.RenderImGUISettings();
+		}
 
-		m_light.RenderImGUISettings();
+		for (int i = 0; i < 4; i++)
+		{
+			std::string text = "Point light " + std::to_string(i + 1);
+			if (ImGui::CollapsingHeader(text.c_str()))
+			{
+				m_pointLight[i].RenderImGUISettings();
+			}
+		}
 	}
 }

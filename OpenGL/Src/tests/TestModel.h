@@ -19,7 +19,8 @@
 #include "gameObjects/Model.h"
 #include "Lighting/Light.h"
 #include <vector>
-
+#include <Lighting/DirectionalLight.h>
+#include "Lighting/PointLight.h"
 
 namespace test {
 
@@ -57,7 +58,8 @@ namespace test {
 		Mesh cubeMesh;
 		Mesh quad;
 
-		Light m_light;
+		DirectionalLight m_dirLight;
+		PointLight m_pointLight[4];
 
 		Camera cam;
 	};

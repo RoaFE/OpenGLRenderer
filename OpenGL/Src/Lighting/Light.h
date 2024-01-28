@@ -27,16 +27,17 @@ public:
 
 	void Render(glm::mat4 view, glm::mat4 projection);
 
-	void SetShaderUniform(Shader* shader, std::string uniformName = "light", std::string positionName = "position", std::string AmbientName = "ambient", std::string DiffuseName = "diffuse", std::string SpecularName = "specular");
-	void RenderImGUISettings();
+	virtual void SetShaderUniform(Shader* shader, std::string uniformName = "light", std::string positionName = "position", std::string AmbientName = "ambient", std::string DiffuseName = "diffuse", std::string SpecularName = "specular");
+	virtual void RenderImGUISettings();
 
 
-private:
+protected:
 	glm::vec3 m_position = glm::vec3(0,10,0);
 	glm::vec3 m_ambient = glm::vec3(0.1f,0.1f,0.1f);
 	glm::vec3 m_diffuse = glm::vec3(0.84f,0.54f,0.11f);
 	glm::vec3 m_specular = glm::vec3(1.0f,1.0f,1.0f);
 	bool m_renderDebug = true;
+
 
 	Mesh m_debugLightMesh;
 	Shader* m_debugLightShader;
