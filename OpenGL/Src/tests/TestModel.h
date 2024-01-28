@@ -43,9 +43,6 @@ namespace test {
 		glm::mat4 proj;
 		glm::mat4 view;
 
-		glm::vec3 m_ambientColour = glm::vec3(0,0.1,0.1);
-		float m_ambientStrength = 0.6;
-
 		float m_FoV;
 
 		Shader* m_Shader;

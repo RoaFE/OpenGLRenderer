@@ -30,7 +30,7 @@ test::TestModel::TestModel()
 	m_UnlitShader->Bind();
 	m_Shader->Bind();
 	m_Texture->Bind(0);
-	m_Shader->SetUniform1f("texture_diffuse1", 0);
+	m_Shader->SetUniform1f("material.diffuse1", 0);
 }
 
 test::TestModel::~TestModel()
@@ -114,9 +114,9 @@ void test::TestModel::OnRender()
 			m_Shader->SetUniformMat4f("u_View", view);
 			m_Shader->SetUniformMat4f("u_Projection", proj);
 			//m_Shader->SetUniform1f("u_Time", glfwGetTime());
-			m_Shader->SetUniform3f("material.ambient", m_ambientColour.r, m_ambientColour.g, m_ambientColour.b);
-			m_Shader->SetUniform3f("material.diffuse", 1.0f, 0.5f, 0.31f);
-			m_Shader->SetUniform3f("material.specular", 0.5f, 0.5f, 0.5f);
+			//m_Shader->SetUniform3f("material.ambient", m_ambientColour.r, m_ambientColour.g, m_ambientColour.b);
+			m_Shader->SetUniform3f("material.diffuse1", 1.0f, 0.5f, 0.31f);
+			m_Shader->SetUniform3f("material.specular1", 0.5f, 0.5f, 0.5f);
 			m_Shader->SetUniform1f("material.shininess", 32.0f);
 
 			m_light.SetShaderUniform(m_Shader);
@@ -169,8 +169,6 @@ void test::TestModel::OnImGuiRender()
 		ImGui::DragFloat("FoV", &m_FoV,0.5, 30, 180);
 		// Edit 1 float using a slider from 0.0f to 1.0f
 		//ImGui::DragFloat3("CameraPos", &translation.x, 0.1f, -20.f, 960.0f);
-		ImGui::ColorEdit3("AmbientColour", &m_ambientColour.x);
-		ImGui::DragFloat("AmbientStrength", &m_ambientStrength, 0.05f, 0, 1);
 
 		m_light.RenderImGUISettings();
 	}
